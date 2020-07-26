@@ -7,17 +7,7 @@
  *      required={"name"}
  * )
  */
-class User {
-    /**
-     * @OA\Property(
-     *      title="name",
-     *      description="Name of the user",
-     *      example="Super"
-     * )
-     *
-     * @var string
-     */
-    public $name;
+class User {    
     /**
      * @OA\Property(
      *      title="email",

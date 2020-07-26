@@ -36,9 +36,7 @@ class AuthController extends Controller
         ]);
 
         $user->save();
-        return response()->json([
-            'message' => 'Successfully created user!'
-        ], 201);
+        return response()->json(['message' => 'Successfully created user!'], 201);
     }
 
 
@@ -47,7 +45,7 @@ class AuthController extends Controller
      *      path="/auth/login",
      *      operationId="getToken",
      *      tags={"Auth"},
-     *      summary="Get object Auth",
+     *      summary="Get User Token",
      *      description="Return Token",
      *      @OA\RequestBody(
      *          required=true,
@@ -75,13 +73,34 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         $request->user()->token()->revoke();
-        return response()->json(['message' =>
-        'Successfully logged out']);
+        return response()->json(['message' =>'Successfully logged out']);
     }
 
+
+    /**
+     * @OA\Get(
+     *      path="/auth/user",
+     *      operationId="getUser",
+     *      tags={"Auth"},
+     *      summary="Get User Auth",
+     *      description="Return User",
+     *      security={ {"bearer": {} }},     
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated"
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *     )
+     */
     public function user(Request $request)
     {
-        // return response()->json(['message' => 'User'], 201);
-        return response()->json($request->user());
+        return $this->AuthQuery->user($request);
     }
 }

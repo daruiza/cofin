@@ -23,28 +23,28 @@ Class AuthQuery implements IAuthQuery{
         }
 
         $user = $request->user();
-        $usr = User::findOrFail($request->user()->id);
-        $permits = $usr->userPermitsApi($request->user()->id);
-        $user->permits = $permits;
-
         $tokenResult = $user->createToken(env('APP_NAME'));
         $token = $tokenResult->token;
         $token->expires_at = Carbon::now()->addDays(1);
-
+        // $token->expires_at = Carbon::now()->addWeeks(1);
         $token->save();
         return response()->json([
             'access_token' => $tokenResult->accessToken,
             'token_type'   => 'Bearer',
             'expires_at'   => Carbon::parse(
                 $tokenResult->token->expires_at
-            )
-                ->toDateTimeString(),
-            'user'  => $user
+            )->toDateTimeString(),
+           
+        ]);        
+    }
 
-        ]);
-
+    public function user(Request $request){
+        $user = $request->user();
+        $usr = User::findOrFail($request->user()->id);
+        $permits = $usr->userPermitsApi($request->user()->id);
+        $user->permits = $permits;
+        return response()->json($request->user());
+        // return response()->json(['message' => 'User'], 201);
         // exit($request);
-        // return response()->json(['message' => $request->all()], 201);
-        // $token->expires_at = Carbon::now()->addWeeks(1);
     }
 }
