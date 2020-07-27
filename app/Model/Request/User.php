@@ -3,11 +3,21 @@
  * @OA\Schema(
  *      title="User",
  *      description="User body data",
- *      type="object",
- *      required={"name"}
+ *      type="object"
  * )
  */
-class User {    
+class User {
+    /**
+     * @OA\Property(
+     *      title="name",
+     *      description="Name of the user",
+     *      example="super"
+     * )
+     *
+     * @var string
+     */
+    public $name;
+
     /**
      * @OA\Property(
      *      title="email",
@@ -18,6 +28,7 @@ class User {
      * @var string
      */
     public $email;
+
      /**
      * @OA\Property(
      *      title="password",

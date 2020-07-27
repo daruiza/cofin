@@ -1,8 +1,8 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Cofin Swagger Documentation",
-        "description": "L5 Swager Cofin description",
+        "title": "Cofin Documentation",
+        "description": "APP Portfolio Management",
         "contact": {
             "email": "daruiza@gmail.com"
         },
@@ -75,6 +75,37 @@
                     }
                 ]
             }
+        },
+        "/auth/signup": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Save User",
+                "description": "Save User in Cofin",
+                "operationId": "saveUser",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -82,10 +113,13 @@
             "User": {
                 "title": "User",
                 "description": "User body data",
-                "required": [
-                    "name"
-                ],
                 "properties": {
+                    "name": {
+                        "title": "name",
+                        "description": "Name of the user",
+                        "type": "string",
+                        "example": "super"
+                    },
                     "email": {
                         "title": "email",
                         "description": "Email of the user",

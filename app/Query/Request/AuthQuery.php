@@ -8,15 +8,22 @@ use Illuminate\Http\Request;
 use App\Query\Abstraction\IAuthQuery;
 use Illuminate\Support\Facades\Auth;
 
-Class AuthQuery implements IAuthQuery{
+class AuthQuery implements IAuthQuery
+{
 
-    public function login(Request $request){
+    private $name = 'name';
+    private $email = 'email';
+    private $password = 'password';
+
+    public function login(Request $request)
+    {
+
         $request->validate([
-            'email'       => 'required|string|email',
-            'password'    => 'required|string',
+            $this->email       => 'required|string|email',
+            $this->password    => 'required|string',
         ]);
 
-        $credentials = request(['email', 'password']);
+        $credentials = request([$this->email, $this->password]);
 
         if (!Auth::attempt($credentials)) {
             return response()->json(['message' => 'Credenciales no autorizadas'], 401);
@@ -34,11 +41,12 @@ Class AuthQuery implements IAuthQuery{
             'expires_at'   => Carbon::parse(
                 $tokenResult->token->expires_at
             )->toDateTimeString(),
-           
-        ]);        
+
+        ]);
     }
 
-    public function user(Request $request){
+    public function user(Request $request)
+    {
         $user = $request->user();
         $usr = User::findOrFail($request->user()->id);
         $permits = $usr->userPermitsApi($request->user()->id);
@@ -46,5 +54,23 @@ Class AuthQuery implements IAuthQuery{
         return response()->json($request->user());
         // return response()->json(['message' => 'User'], 201);
         // exit($request);
+    }
+
+    public function signup(Request $request)
+    {
+        $request->validate([
+            $this->name     => 'required|string',
+            $this->email    => 'required|string|email|unique:users',
+            $this->password => 'required|string|confirmed',
+        ]);
+
+        $user = new User([
+            $this->name     => $request->name,
+            $this->email    => $request->email,
+            $this->password => bcrypt($request->password),
+        ]);
+
+        $user->save();
+        return response()->json(['message' => 'Usuario creado correctamente!'], 201);
     }
 }

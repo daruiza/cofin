@@ -10,8 +10,8 @@ use Illuminate\Routing\Controller as BaseController;
 /**
  * @OA\Info(
  *      version="1.0.0",
- *      title="Cofin Swagger Documentation",
- *      description="L5 Swager Cofin description",
+ *      title="Cofin Documentation",
+ *      description="APP Portfolio Management",
  *      
  *      @OA\Contact(
  *          email="daruiza@gmail.com"

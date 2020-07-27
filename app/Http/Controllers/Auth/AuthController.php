@@ -18,28 +18,6 @@ class AuthController extends Controller
         $this->AuthQuery = $AuthQuery;
     }
 
-
-    //Para autenticación de APP
-    public function signup(Request $request)
-    {
-
-        $request->validate([
-            'name'     => 'required|string',
-            'email'    => 'required|string|email|unique:users',
-            'password' => 'required|string|confirmed',
-        ]);
-
-        $user = new User([
-            'name'     => $request->name,
-            'email'    => $request->email,
-            'password' => bcrypt($request->password),
-        ]);
-
-        $user->save();
-        return response()->json(['message' => 'Successfully created user!'], 201);
-    }
-
-
     /**
      * @OA\Post(
      *      path="/auth/login",
@@ -73,7 +51,7 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         $request->user()->token()->revoke();
-        return response()->json(['message' =>'Successfully logged out']);
+        return response()->json(['message' => 'Successfully logged out']);
     }
 
 
@@ -102,5 +80,35 @@ class AuthController extends Controller
     public function user(Request $request)
     {
         return $this->AuthQuery->user($request);
+    }
+
+    /**
+     * @OA\Post(
+     *      path="/auth/signup",
+     *      operationId="saveUser",
+     *      tags={"Auth"},
+     *      summary="Save User",
+     *      description="Save User in Cofin",
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(ref="#/components/schemas/User")
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *     )
+     */
+    public function signup(Request $request)
+    {
+        return $this->AuthQuery->signup($request);
     }
 }
