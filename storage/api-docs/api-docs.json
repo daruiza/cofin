@@ -89,7 +89,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/User"
+                                "$ref": "#/components/schemas/UserSingup"
                             }
                         }
                     }
@@ -128,6 +128,37 @@
                     },
                     "password": {
                         "title": "password",
+                        "description": "Password of the user",
+                        "type": "string",
+                        "example": "0000"
+                    }
+                },
+                "type": "object"
+            },
+            "UserSingup": {
+                "title": "UserSingup",
+                "description": "User body data",
+                "properties": {
+                    "name": {
+                        "title": "name",
+                        "description": "Name of the user",
+                        "type": "string",
+                        "example": "super"
+                    },
+                    "email": {
+                        "title": "email",
+                        "description": "Email of the user",
+                        "type": "string",
+                        "example": "super@yopmail.com"
+                    },
+                    "password": {
+                        "title": "password",
+                        "description": "Password of the user",
+                        "type": "string",
+                        "example": "0000"
+                    },
+                    "password_confirmation": {
+                        "title": "password_confirmation",
                         "description": "Password of the user",
                         "type": "string",
                         "example": "0000"

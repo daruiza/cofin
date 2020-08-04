@@ -52,17 +52,20 @@ class AuthQuery implements IAuthQuery
         $permits = $usr->userPermitsApi($request->user()->id);
         $user->permits = $permits;
         return response()->json($request->user());
-        // return response()->json(['message' => 'User'], 201);
         // exit($request);
     }
 
     public function signup(Request $request)
     {
-        $request->validate([
-            $this->name     => 'required|string',
-            $this->email    => 'required|string|email|unique:users',
-            $this->password => 'required|string|confirmed',
-        ]);
+        try {
+            $request->validate([
+                $this->name     => 'required|string',
+                $this->email    => 'required|string|email|unique:users',
+                $this->password => 'required|string|confirmed',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 402);
+        }
 
         $user = new User([
             $this->name     => $request->name,

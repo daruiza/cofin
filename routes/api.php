@@ -14,15 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/test', function () {    
-    $json = '{"hello": "Test API"}';
-    return response($json, 200)->header('Content-Type', 'application/json');
-});
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::group(['prefix' => 'auth'], function () {
     Route::post('login', 'Auth\AuthController@login')->name('login');
     Route::post('signup', 'Auth\AuthController@signup')->name('signup');    

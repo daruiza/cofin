@@ -91,7 +91,7 @@ class AuthController extends Controller
      *      description="Save User in Cofin",
      *      @OA\RequestBody(
      *          required=true,
-     *          @OA\JsonContent(ref="#/components/schemas/User")
+     *          @OA\JsonContent(ref="#/components/schemas/UserSingup")
      *      ),
      *      @OA\Response(
      *          response=200,
