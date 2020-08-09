@@ -23,3 +23,10 @@ Route::group(['prefix' => 'auth'], function () {
         Route::get('user', 'Auth\AuthController@user');    
     });
 });
+
+Route::group(['prefix' => 'commerce'], function () {
+    Route::group(['middleware' => 'auth:api'], function () {
+        Route::get('index', 'Api\CommerceController@index');
+        Route::get('show/{id}', 'Api\CommerceController@show');
+    });
+});

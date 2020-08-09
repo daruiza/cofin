@@ -14,11 +14,74 @@
     },
     "servers": [
         {
-            "url": "http://localhost/cofin/public/api",
+            "url": "http://127.0.0.1:8080/api",
             "description": "Cofin API Server"
         }
     ],
     "paths": {
+        "/commerce/index": {
+            "get": {
+                "tags": [
+                    "Commerce"
+                ],
+                "summary": "Get All Commerces",
+                "description": "Return Commerces",
+                "operationId": "getAllCommerces",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/commerce/show/{id}": {
+            "get": {
+                "tags": [
+                    "Commerce"
+                ],
+                "summary": "Get One IdCommerce",
+                "description": "Return Commerces",
+                "operationId": "getIdCommerce",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Commerce id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
         "/auth/login": {
             "post": {
                 "tags": [
@@ -48,6 +111,32 @@
                         "description": "Forbidden"
                     }
                 }
+            }
+        },
+        "/auth/logout": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "GetOut",
+                "description": "Close session",
+                "operationId": "App\\Http\\Controllers\\Auth\\AuthController::logout",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
             }
         },
         "/auth/user": {
@@ -178,6 +267,10 @@
         {
             "name": "Auth",
             "description": "API EndPoints of Auth"
+        },
+        {
+            "name": "Commerce",
+            "description": "API EndPoints of Commerces"
         }
     ]
 }

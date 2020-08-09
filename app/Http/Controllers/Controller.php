@@ -32,6 +32,11 @@ use Illuminate\Routing\Controller as BaseController;
  *     description="API EndPoints of Auth"
  * ) 
  * 
+ * * @OA\Tag(
+ *     name="Commerce",
+ *     description="API EndPoints of Commerces"
+ * ) 
+ * 
  * 
  * @OA\SecuritySchemes(
  *     securityDefinition="bearer",
