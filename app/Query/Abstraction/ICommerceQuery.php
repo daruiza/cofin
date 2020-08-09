@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 
 interface ICommerceQuery {    
     public function index();
-    public function show(Int $id);
+    public function show(Request $request, int $id);
     public function store(Request $request);
-    public function update(Request $request, Int $id);
+    public function update(Request $request, int $id);
     public function destroy(Int $id);    
 }

@@ -48,11 +48,13 @@ class AuthQuery implements IAuthQuery
     public function user(Request $request)
     {
         $user = $request->user();
-        $usr = User::findOrFail($request->user()->id);
-        $permits = $usr->userPermitsApi($request->user()->id);
+        $usrAuxi = User::findOrFail($request->user()->id);
+        $permits = $usrAuxi->userPermitsApi($request->user()->id);
         $user->permits = $permits;
-        return response()->json($request->user());
-        // exit($request);
+        $user->rol = $usrAuxi->rol;
+        $user->acount = $usrAuxi->acount;
+        $user->commerce = $usrAuxi->commerce;
+        return response()->json($user);
     }
 
     public function signup(Request $request)

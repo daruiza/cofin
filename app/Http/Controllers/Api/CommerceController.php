@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendMailInvoice;
+
 use App\Query\Abstraction\ICommerceQuery;
 
 class CommerceController extends Controller
@@ -42,6 +45,7 @@ class CommerceController extends Controller
      */
     public function index()
     {
+        Mail::to('daruiza@gmail.com')->send(new SendMailInvoice());
         return $this->CommerceQuery->index();
     }
 
@@ -97,9 +101,9 @@ class CommerceController extends Controller
      *      )
      *     )
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        return $this->CommerceQuery->show($id);
+        return $this->CommerceQuery->show($request, $id);
     }
 
     /**

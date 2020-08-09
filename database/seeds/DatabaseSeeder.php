@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call(AcountsSeeder::class);    
         $this->call(CommercesSeeder::class);
         $this->call(UserSeeder::class);
-        
+        $this->call(CustomersSeeder::class);
+        $this->call(InvoicesSeeder::class);
+        $this->call(InvoiceDetailsSeeder::class);        
     }
 }

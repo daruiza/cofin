@@ -52,10 +52,11 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Model\Admin\Acount::class);
     }
+
     //a user may belongs a customers
-    public function waiter()
+    public function commerce()
     {
-        return $this->belongsTo(Model\Core\Customers::class);
+        return $this->belongsTo(Model\Core\Commerce::class);
     }
 
 
