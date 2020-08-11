@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMailInvoice;
+use App\Mail\SendInvoice;
 
 use App\Query\Abstraction\ICommerceQuery;
 
@@ -45,7 +46,13 @@ class CommerceController extends Controller
      */
     public function index()
     {
-        Mail::to('daruiza@gmail.com')->send(new SendMailInvoice());
+        // Mail::to('daruiza@gmail.com')->send(new SendMailInvoice());
+
+        $data = (object) array(
+            'commerceName' => 'CommerceName',
+            'customerName' => 'CustomerName'
+        );
+        Mail::to('daruiza@gmail.com')->send(new SendInvoice($data));
         return $this->CommerceQuery->index();
     }
 

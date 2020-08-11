@@ -28,8 +28,6 @@ class SendMailInvoice extends Mailable
      */
     public function build()
     {
-        $this->from('daruiza@gmail.com')
-                ->view('email.sendInvoice');
-        // return $this->view('email.sendInvoice');
+        $this->from('daruiza@gmail.com')->view('email.sendInvoice');
     }
 }
