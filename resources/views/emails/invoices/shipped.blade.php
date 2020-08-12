@@ -1,12 +1,16 @@
-@component('mail::message',['commerceName'=> $data->commerceName])
+@component('mail::message',['commerce'=> $data->commerce])
 
-# {{ $data->customerName }} tienes una cuenta por pagar
+<div class="mail-container">
+    <p>
+        {{ $data->customer['name'] }} tienes una cuenta por pagar
+    </p>
+</div>
 
-{{ $data->commerceName }}
+{{ $data->commerce['name'] }}
 
 @component(
     'mail::button',
-    ['url' => config('app.url').$data->commerceName])
+    ['url' => config('app.url').$data->commerce['name']])
     Pagó en Línea
 @endcomponent
 

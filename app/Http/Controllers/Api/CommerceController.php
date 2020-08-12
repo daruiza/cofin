@@ -49,8 +49,9 @@ class CommerceController extends Controller
         // Mail::to('daruiza@gmail.com')->send(new SendMailInvoice());
 
         $data = (object) array(
-            'commerceName' => 'CommerceName',
-            'customerName' => 'CustomerName'
+            'commerce' => array('name' => 'CommerceName'),
+            'customer' => array('name' => 'CustomerName'),
+            'invoice' => array('dateStart' => '06-08-2020'),
         );
         Mail::to('daruiza@gmail.com')->send(new SendInvoice($data));
         return $this->CommerceQuery->index();
