@@ -32,15 +32,25 @@ use Illuminate\Routing\Controller as BaseController;
  *     description="API EndPoints of Auth"
  * ) 
  * 
- * * @OA\Tag(
+ * @OA\Tag(
  *     name="Commerce",
  *     description="API EndPoints of Commerces"
+ * ) 
+ * 
+ * @OA\Tag(
+ *     name="Customer",
+ *     description="API EndPoints of Customer"
+ * ) 
+ * 
+ * @OA\Tag(
+ *     name="Invoice",
+ *     description="API EndPoints of Invoice"
  * ) 
  * 
  * 
  * @OA\SecuritySchemes(
  *     securityDefinition="bearer",
-*      type="apiKey",
+ *      type="apiKey",
  *     in="header",
  *     name="Authorization"
  * )

@@ -74,4 +74,36 @@ class User extends Authenticatable
         }
         return $permits;
     }
+
+    public function createRepository($user_id)
+    {
+        $image_users = 'images/users/' . $user_id;
+
+        //verificacion de existencia de directorio
+        if (is_dir($image_users)) {
+            return false;
+        }
+
+        // Profile
+        if (!mkdir($image_users . '/profile', 0777, true)) {
+            return false;
+        }
+        chmod($image_users, 0777);
+        if (!copy('images/dafault/user.png', $image_users . '/profile/default.png')) {
+            return false;
+        }
+        chmod($image_users . '/profile/default.png', 0777);       
+
+        // Commerce
+        if (!mkdir($image_users . '/commerce', 0777, true)) {
+            return false;
+        }
+        chmod($image_users, 0777);        
+        if (!copy('images/dafault/commerce.png', $image_users . '/commerce/default.png')) {
+            return false;
+        }
+        chmod($image_users . '/commerce/default.png', 0777);
+
+        return true;
+    }
 }

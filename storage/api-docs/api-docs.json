@@ -45,6 +45,42 @@
                 ]
             }
         },
+        "/commerce/store": {
+            "post": {
+                "tags": [
+                    "Commerce"
+                ],
+                "summary": "Store Commerce",
+                "description": "Store Commerce",
+                "operationId": "storeCommerce",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Commerce"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
         "/commerce/show/{id}": {
             "get": {
                 "tags": [
@@ -58,6 +94,105 @@
                         "name": "id",
                         "in": "path",
                         "description": "Commerce id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/customer/index": {
+            "get": {
+                "tags": [
+                    "Customer"
+                ],
+                "summary": "Get All Customers",
+                "description": "Return Customers",
+                "operationId": "getAllCustomers",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/customer/store": {
+            "post": {
+                "tags": [
+                    "Customer"
+                ],
+                "summary": "Store Customer",
+                "description": "Store Customer",
+                "operationId": "storeCustomer",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Customer"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/customer/show/{id}": {
+            "get": {
+                "tags": [
+                    "Customer"
+                ],
+                "summary": "Get One IdCustomer",
+                "description": "Return Customers",
+                "operationId": "getIdCustomer",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Customer id",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -205,9 +340,15 @@
                 "properties": {
                     "name": {
                         "title": "name",
-                        "description": "Name of the user",
+                        "description": "Name of the commerce",
                         "type": "string",
                         "example": "TempoSolutions"
+                    },
+                    "nit": {
+                        "title": "nit",
+                        "description": "Nit of the Commerce",
+                        "type": "string",
+                        "example": "1039420535-4"
                     },
                     "department": {
                         "title": "department",
@@ -249,7 +390,87 @@
                         "title": "label",
                         "description": "label of the commerce",
                         "type": "string",
-                        "example": "{}}"
+                        "example": "{}"
+                    }
+                },
+                "type": "object"
+            },
+            "Customer": {
+                "title": "Customer",
+                "description": "Customer body data",
+                "properties": {
+                    "user_id": {
+                        "title": "user_id",
+                        "description": "user_id of the Customer",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "commerce_id": {
+                        "title": "nit",
+                        "description": "commerce_id of the Customer",
+                        "type": "integer",
+                        "example": "1"
+                    }
+                },
+                "type": "object"
+            },
+            "Invoice": {
+                "title": "Invoice",
+                "description": "Invoice body data",
+                "properties": {
+                    "name": {
+                        "title": "name",
+                        "description": "Name of the commerce",
+                        "type": "string",
+                        "example": "TempoSolutions"
+                    },
+                    "number": {
+                        "title": "number",
+                        "description": "Nit of the Commerce",
+                        "type": "string",
+                        "example": "AB78546"
+                    },
+                    "description": {
+                        "title": "description",
+                        "description": "Description of the invoice",
+                        "type": "string",
+                        "example": "Description"
+                    },
+                    "dateStart": {
+                        "title": "dateStart",
+                        "description": "dateStart of the invoice",
+                        "type": "string",
+                        "example": "20-01-2020"
+                    },
+                    "dateEnd": {
+                        "title": "dateEnd",
+                        "description": "dateEnd of the invoice",
+                        "type": "string",
+                        "example": "20-12-2020"
+                    },
+                    "loop": {
+                        "title": "loop",
+                        "description": "loop of the invoice",
+                        "type": "integer",
+                        "example": "7"
+                    },
+                    "loopDate": {
+                        "title": "loopDate",
+                        "description": "loopDate of the invoice",
+                        "type": "integer",
+                        "example": "15"
+                    },
+                    "loopDay": {
+                        "title": "loopDay",
+                        "description": "loopDay of the invoice",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "customer_id": {
+                        "title": "customer_id",
+                        "description": "customer_id of the invoice",
+                        "type": "integer",
+                        "example": "1"
                     }
                 },
                 "type": "object"
@@ -326,6 +547,14 @@
         {
             "name": "Commerce",
             "description": "API EndPoints of Commerces"
+        },
+        {
+            "name": "Customer",
+            "description": "API EndPoints of Customer"
+        },
+        {
+            "name": "Invoice",
+            "description": "API EndPoints of Invoice"
         }
     ]
 }

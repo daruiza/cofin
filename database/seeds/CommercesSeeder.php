@@ -14,6 +14,7 @@ class CommercesSeeder extends Seeder
     {
         DB::table('commerces')->insert(array(        	
 			'name'=>'Default',
+			'nit'=>'1039420535-1',
 			'department'=>'Antioquia',
 			'city'=>'Medellín',
 			'adress'=>'Cr 1 - 1 # 1',

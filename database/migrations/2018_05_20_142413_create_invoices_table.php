@@ -21,6 +21,8 @@ class CreateInvoicesTable extends Migration
             $table->dateTime('dateStart');
             $table->dateTime('dateEnd');
             $table->integer('loop');
+            $table->integer('loopDate');
+            $table->integer('loopDay');
             $table->integer('customer_id')->unsigned()->default(1);            
             $table->foreign('customer_id')->references('id')->on('customers')
             ->onDelete('cascade')

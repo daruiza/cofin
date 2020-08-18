@@ -20,7 +20,9 @@ class InvoicesSeeder extends Seeder
             'description' => 'Descripción de Sercvicio',
             'dateStart' => Carbon::now(),
             'dateEnd' => Carbon::now()->addMonth(1),
-            'loop' => 1,			
+            'loop' => 7,			
+            'loopDate' => 15,			
+            'loopDay' => 1,			
 			'customer_id' => 1
 		));
 

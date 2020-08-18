@@ -5,30 +5,25 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use Illuminate\Support\Facades\Mail;
-use App\Mail\SendMailInvoice;
-use App\Mail\SendInvoice;
+use App\Query\Abstraction\ICustomerQuery;
 
-use App\Query\Abstraction\ICommerceQuery;
-
-class CommerceController extends Controller
+class CustomerController extends Controller
 {
 
-    private $CommerceQuery;
+    private $CustomerQuery;
 
-    public function __construct(ICommerceQuery $CommerceQuery)
+    public function __construct(ICustomerQuery $CustomerQuery)
     {
-        $this->CommerceQuery = $CommerceQuery;
+        $this->CustomerQuery = $CustomerQuery;
     }
-
 
     /**
      * @OA\Get(
-     *      path="/commerce/index",
-     *      operationId="getAllCommerces",
-     *      tags={"Commerce"},
-     *      summary="Get All Commerces",
-     *      description="Return Commerces",
+     *      path="/customer/index",
+     *      operationId="getAllCustomers",
+     *      tags={"Customer"},
+     *      summary="Get All Customers",
+     *      description="Return Customers",
      *      security={ {"bearer": {} }},     
      *      @OA\Response(
      *          response=200,
@@ -45,16 +40,8 @@ class CommerceController extends Controller
      *     )
      */
     public function index()
-    {
-        // Mail::to('daruiza@gmail.com')->send(new SendMailInvoice());
-
-        $data = (object) array(
-            'commerce' => array('name' => 'CommerceName'),
-            'customer' => array('name' => 'CustomerName'),
-            'invoice' => array('dateStart' => '06-08-2020'),
-        );
-        Mail::to('daruiza@gmail.com')->send(new SendInvoice($data));
-        return $this->CommerceQuery->index();
+    {   
+        return $this->CustomerQuery->index();
     }
 
     /**
@@ -67,17 +54,17 @@ class CommerceController extends Controller
         return '';
     }
 
-   /**
+    /**
      * @OA\Post(
-     *       path="/commerce/store",
-     *      operationId="storeCommerce",
-     *      tags={"Commerce"},
-     *      summary="Store Commerce",
-     *      description="Store Commerce",
+     *       path="/customer/store",
+     *      operationId="storeCustomer",
+     *      tags={"Customer"},
+     *      summary="Store Customer",
+     *      description="Store Customer",
      *      security={ {"bearer": {} }},  
      *      @OA\RequestBody(
      *          required=true,
-     *          @OA\JsonContent(ref="#/components/schemas/Commerce")
+     *          @OA\JsonContent(ref="#/components/schemas/Customer")
      *      ),
      *      @OA\Response(
      *          response=200,
@@ -95,20 +82,20 @@ class CommerceController extends Controller
      */
     public function store(Request $request)
     {
-        return $this->CommerceQuery->store($request);
+        return $this->CustomerQuery->store($request);
     }
 
     /**
      * @OA\Get(
-     *      path="/commerce/show/{id}",
-     *      operationId="getIdCommerce",
-     *      tags={"Commerce"},
-     *      summary="Get One IdCommerce",
-     *      description="Return Commerces",
+     *      path="/customer/show/{id}",
+     *      operationId="getIdCustomer",
+     *      tags={"Customer"},
+     *      summary="Get One IdCustomer",
+     *      description="Return Customers",
      *      security={ {"bearer": {} }},
      *      @OA\Parameter(
      *          name="id",
-     *          description="Commerce id",
+     *          description="Customer id",
      *          required=true,
      *          in="path",
      *          @OA\Schema(
@@ -131,7 +118,7 @@ class CommerceController extends Controller
      */
     public function show(Request $request, $id)
     {
-        return $this->CommerceQuery->show($request, $id);
+        return $this->CustomerQuery->show($request, $id);
     }
 
     /**

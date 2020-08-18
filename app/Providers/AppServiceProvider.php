@@ -12,6 +12,14 @@ use App\Query\Abstraction\ICommerceQuery;
 use App\Query\Request\CommerceQuery;
 use App\Http\Controllers\Api\CommerceController;
 
+use App\Query\Abstraction\IInvoiceQuery;
+use App\Query\Request\InvoiceQuery;
+use App\Http\Controllers\Api\InvoiceController;
+
+use App\Query\Abstraction\ICustomerQuery;
+use App\Query\Request\CustomerQuery;
+use App\Http\Controllers\Api\CustomerController;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -26,6 +34,12 @@ class AppServiceProvider extends ServiceProvider
         
         $this->app->bind(ICommerceQuery::class,CommerceQuery::class);
         $this->app->make(CommerceController::class);
+
+        $this->app->bind(IInvoiceQuery::class,InvoiceQuery::class);
+        $this->app->make(InvoiceController::class);
+
+        $this->app->bind(ICustomerQuery::class,CustomerQuery::class);
+        $this->app->make(CustomerController::class);        
     }
 
     /**
@@ -35,6 +49,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // boot
     }
 }

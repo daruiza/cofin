@@ -10,13 +10,25 @@ class Commerce {
     /**
      * @OA\Property(
      *      title="name",
-     *      description="Name of the user",
+     *      description="Name of the commerce",
      *      example="TempoSolutions"
      * )
      *
      * @var string
      */
     public $name;
+
+
+    /**
+     * @OA\Property(
+     *      title="nit",
+     *      description="Nit of the Commerce",
+     *      example="1039420535-4"
+     * )
+     *
+     * @var string
+     */
+    public $nit;
 
 
     /**
@@ -88,7 +100,7 @@ class Commerce {
      * @OA\Property(
      *      title="label",
      *      description="label of the commerce",
-     *      example="{}}"
+     *      example="{}"
      * )
      *
      * @var string

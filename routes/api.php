@@ -28,5 +28,14 @@ Route::group(['prefix' => 'commerce'], function () {
     Route::group(['middleware' => 'auth:api'], function () {
         Route::get('index', 'Api\CommerceController@index');
         Route::get('show/{id}', 'Api\CommerceController@show');
+        Route::post('store', 'Api\CommerceController@store');
+    });
+});
+
+Route::group(['prefix' => 'customer'], function () {
+    Route::group(['middleware' => 'auth:api'], function () {
+        Route::get('index', 'Api\CustomerController@index');
+        Route::get('show/{id}', 'Api\CustomerController@show');
+        Route::post('store', 'Api\CustomerController@store');
     });
 });
