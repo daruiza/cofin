@@ -39,3 +39,11 @@ Route::group(['prefix' => 'customer'], function () {
         Route::post('store', 'Api\CustomerController@store');
     });
 });
+
+Route::group(['prefix' => 'invoice'], function () {
+    Route::group(['middleware' => 'auth:api'], function () {
+        Route::get('index', 'Api\InvoiceController@index');
+        Route::get('show/{id}', 'Api\InvoiceController@show');
+        Route::post('store', 'Api\InvoiceController@store');
+    });
+});

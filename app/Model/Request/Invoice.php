@@ -46,7 +46,7 @@ class Invoice {
      * @OA\Property(
      *      title="dateStart",
      *      description="dateStart of the invoice",
-     *      example="20-01-2020"
+     *      example="2020-01-20"
      * )
      *
      * @var string
@@ -57,7 +57,7 @@ class Invoice {
      * @OA\Property(
      *      title="dateEnd",
      *      description="dateEnd of the invoice",
-     *      example="20-12-2020"
+     *      example="2020-12-20"
      * )
      *
      * @var string
@@ -79,7 +79,7 @@ class Invoice {
      * @OA\Property(
      *      title="loopDate",
      *      description="loopDate of the invoice",
-     *      example="15"
+     *      example="2020-12-25"
      * )
      *
      * @var integer
@@ -107,5 +107,15 @@ class Invoice {
      * @var integer
      */
     public $customer_id;   
-}
 
+    /**
+     * @OA\Property(
+     *      title="invoice_detail",
+     *      description="invoice_detail of the invoice",
+     *      example={{"price":10000,"volume": 2,"description": "description"}, {"price":25000,"volume": 1,"description": "description"}}
+     * )
+     *
+     * @var object
+     */
+    public $invoice_detail;
+}

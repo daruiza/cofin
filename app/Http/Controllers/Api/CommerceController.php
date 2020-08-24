@@ -48,7 +48,9 @@ class CommerceController extends Controller
     {
         // Mail::to('daruiza@gmail.com')->send(new SendMailInvoice());
 
+        // consultamos las facturas vigentes
         $data = (object) array(
+            'from' => 'daruiza@gmail.com',
             'commerce' => array('name' => 'CommerceName'),
             'customer' => array('name' => 'CustomerName'),
             'invoice' => array('dateStart' => '06-08-2020'),

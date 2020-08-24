@@ -29,16 +29,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(IAuthQuery::class,AuthQuery::class);
+        $this->app->bind(IAuthQuery::class, AuthQuery::class);
         $this->app->make(AuthController::class);
         
-        $this->app->bind(ICommerceQuery::class,CommerceQuery::class);
+        $this->app->bind(ICommerceQuery::class, CommerceQuery::class);
         $this->app->make(CommerceController::class);
 
-        $this->app->bind(IInvoiceQuery::class,InvoiceQuery::class);
+        $this->app->bind(IInvoiceQuery::class, InvoiceQuery::class);
         $this->app->make(InvoiceController::class);
 
-        $this->app->bind(ICustomerQuery::class,CustomerQuery::class);
+        $this->app->bind(ICustomerQuery::class, CustomerQuery::class);
         $this->app->make(CustomerController::class);        
     }
 

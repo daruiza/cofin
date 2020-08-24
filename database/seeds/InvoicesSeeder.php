@@ -21,8 +21,9 @@ class InvoicesSeeder extends Seeder
             'dateStart' => Carbon::now(),
             'dateEnd' => Carbon::now()->addMonth(1),
             'loop' => 7,			
-            'loopDate' => 15,			
-            'loopDay' => 1,			
+            'loopDate' => Carbon::now()->addWeek(1),			
+            'loopDay' => 1,	
+            'invoices_status_id' => 1,
 			'customer_id' => 1
 		));
 
