@@ -35,7 +35,7 @@ class SendInvoice extends Mailable
      */
     public function build()
     {
-        return $this->from($this->data->from)
+        return $this->from($this->data->owner['email'])
             ->markdown('emails.invoices.shipped')
             ->with(['data' => $this->data]);
     }

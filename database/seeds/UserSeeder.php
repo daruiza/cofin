@@ -45,5 +45,16 @@ class UserSeeder extends Seeder
 			'acount_id' => 1,
 			'commerce_id' => 1
 		));
+
+		DB::table('users')->insert(array(
+			'name' => 'Escamoso',
+			'surname' => 'Escamoso',
+			'email' => 'escamoso@yopmail.com',
+			'phone' => '31122222222',
+			'password' => Hash::make('0000'),
+			'rol_id' => 3,
+			'acount_id' => 1,
+			'commerce_id' => 1
+		));
 	}
 }

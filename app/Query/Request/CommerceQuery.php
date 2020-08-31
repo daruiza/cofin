@@ -38,6 +38,14 @@ class CommerceQuery implements ICommerceQuery
         return response()->json(['id' => $newCommerce->id], 201);
     }
 
+    public function display(Request $request, String $id)
+    {
+        $commerce = Commerce::where('name','LIKE',$id)->first();
+        return $commerce ?
+            response()->json($commerce, 200) :
+            response()->json(['message' => 'Commerce no exist!'], 404);
+    }
+
     public function update(Request $request, Int $id)
     {
         return response()->json(['message' => 'Commerce update!'], 201);
@@ -47,4 +55,6 @@ class CommerceQuery implements ICommerceQuery
     {
         return response()->json(['message' => 'Commerce destroy!'], 201);
     }
+
+    
 }

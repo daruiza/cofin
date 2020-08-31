@@ -9,5 +9,6 @@ interface ICommerceQuery {
     public function show(Request $request, int $id);
     public function store(Request $request);
     public function update(Request $request, int $id);
-    public function destroy(Int $id);    
+    public function destroy(Int $id);
+    public function display(Request $request, String $id);
 }

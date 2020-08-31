@@ -53,7 +53,7 @@ class User extends Authenticatable
         return $this->belongsTo(Model\Admin\Acount::class);
     }
 
-    //a user may belongs a customers
+    //a user may belongs a customers or is owner to commerce
     public function commerce()
     {
         return $this->belongsTo(Model\Core\Commerce::class);

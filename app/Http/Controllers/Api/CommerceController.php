@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMailInvoice;
 use App\Mail\SendInvoice;
 
+use App\Model\Core\Invoice;
+use App\Model\Core\Customer;
+
 use App\Query\Abstraction\ICommerceQuery;
 
 class CommerceController extends Controller
@@ -46,16 +49,20 @@ class CommerceController extends Controller
      */
     public function index()
     {
-        // Mail::to('daruiza@gmail.com')->send(new SendMailInvoice());
+
 
         // consultamos las facturas vigentes
-        $data = (object) array(
-            'from' => 'daruiza@gmail.com',
-            'commerce' => array('name' => 'CommerceName'),
-            'customer' => array('name' => 'CustomerName'),
-            'invoice' => array('dateStart' => '06-08-2020'),
-        );
-        Mail::to('daruiza@gmail.com')->send(new SendInvoice($data));
+        foreach (Invoice::where('invoices_status_id', 2)->get() as $invoice) {
+            $data = (object) array(
+                'owner' => $invoice->customer->commerce->owner->toArray(),
+                'commerce' => $invoice->customer->commerce->toArray(),
+                'invoice' => $invoice->toArray(),
+                'customer' => $invoice->customer->user->toArray(),
+            );
+
+            Mail::to($data->customer['email'])->send(new SendInvoice($data));
+        }
+        // dd($data);
         return $this->CommerceQuery->index();
     }
 
@@ -69,7 +76,7 @@ class CommerceController extends Controller
         return '';
     }
 
-   /**
+    /**
      * @OA\Post(
      *       path="/commerce/store",
      *      operationId="storeCommerce",
@@ -135,6 +142,43 @@ class CommerceController extends Controller
     {
         return $this->CommerceQuery->show($request, $id);
     }
+
+    /**
+     * @OA\Get(
+     *      path="/commerce/display/{id}",
+     *      operationId="getNameCommerce",
+     *      tags={"Commerce"},
+     *      summary="Get One NameCommerce",
+     *      description="Return Commerces",
+     *      security={ {"bearer": {} }},
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="Commerce name",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),  
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated"
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *     )
+     */
+    public function display(Request $request, $id)
+    {        
+        return $this->CommerceQuery->display($request, $id);
+    }
+
 
     /**
      * Show the form for editing the specified resource.

@@ -16,5 +16,10 @@ class CustomersSeeder extends Seeder
 			'user_id' => 3,
             'commerce_id' => 1
 		));
+
+		DB::table('customers')->insert(array(			
+			'user_id' => 4,
+            'commerce_id' => 1
+		));
     }
 }

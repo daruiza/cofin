@@ -47,3 +47,5 @@ Route::group(['prefix' => 'invoice'], function () {
         Route::post('store', 'Api\InvoiceController@store');
     });
 });
+
+Route::get('/{commerce}', 'Api\CommerceController@display');

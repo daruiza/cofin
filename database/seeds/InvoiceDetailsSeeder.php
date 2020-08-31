@@ -19,6 +19,13 @@ class InvoiceDetailsSeeder extends Seeder
             'volume' => 1,
             'description' => 'Descripción de Detalle',
             'invoice_id' => 1
+        ));
+        
+        DB::table('invoices_detail')->insert(array(
+            'price' => 345000,
+            'volume' => 1,
+            'description' => 'Descripción de Detalle',
+            'invoice_id' => 2
 		));
 
     }

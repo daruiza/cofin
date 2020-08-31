@@ -19,15 +19,15 @@ class RolSeeder extends Seeder
         );
         		
 		\DB::table('rols')->insert(array(
-			'name'=>'Administrador',
-			'description'=>'admin',
+			'name'=>'Propietario',
+			'description'=>'propietario',
 			'label'=>'{"options":["editProfile","editStore","passwordChange"],"options_dashboard":["consultClousure","editClousure"]}'
 			)
         );
         
 		\DB::table('rols')->insert(array(
-			'name'=>'Agente',
-			'description'=>'adminCustomers',
+			'name'=>'Cliente',
+			'description'=>'cliente',
 			'label'=>'{"options":["editProfile","passwordChange"],"options_dashboard":["sendMessage"]}'
 			)
 		);
