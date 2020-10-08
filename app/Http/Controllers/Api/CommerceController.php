@@ -5,13 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use Illuminate\Support\Facades\Mail;
-use App\Mail\SendMailInvoice;
-use App\Mail\SendInvoice;
-
-use App\Model\Core\Invoice;
-use App\Model\Core\Customer;
-
 use App\Query\Abstraction\ICommerceQuery;
 
 class CommerceController extends Controller
@@ -50,19 +43,6 @@ class CommerceController extends Controller
     public function index()
     {
 
-
-        // consultamos las facturas vigentes
-        foreach (Invoice::where('invoices_status_id', 2)->get() as $invoice) {
-            $data = (object) array(
-                'owner' => $invoice->customer->commerce->owner->toArray(),
-                'commerce' => $invoice->customer->commerce->toArray(),
-                'invoice' => $invoice->toArray(),
-                'customer' => $invoice->customer->user->toArray(),
-            );
-
-            Mail::to($data->customer['email'])->send(new SendInvoice($data));
-        }
-        // dd($data);
         return $this->CommerceQuery->index();
     }
 
@@ -78,7 +58,7 @@ class CommerceController extends Controller
 
     /**
      * @OA\Post(
-     *       path="/commerce/store",
+     *      path="/commerce/store",
      *      operationId="storeCommerce",
      *      tags={"Commerce"},
      *      summary="Store Commerce",
@@ -109,19 +89,27 @@ class CommerceController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/commerce/show/{id}",
+     *      path="/commerce/show",
      *      operationId="getIdCommerce",
      *      tags={"Commerce"},
      *      summary="Get One IdCommerce",
-     *      description="Return Commerces",
-     *      security={ {"bearer": {} }},
+     *      description="Return Commerces",     
      *      @OA\Parameter(
      *          name="id",
      *          description="Commerce id",
-     *          required=true,
-     *          in="path",
+     *          required=false,
+     *          in="query",
      *          @OA\Schema(
      *              type="integer"
+     *          )
+     *      ),  
+     *      @OA\Parameter(
+     *          name="name",
+     *          description="Commerce name",
+     *          required=false,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
      *          )
      *      ),  
      *      @OA\Response(
@@ -138,9 +126,9 @@ class CommerceController extends Controller
      *      )
      *     )
      */
-    public function show(Request $request, $id)
+    public function show(Request $request)
     {
-        return $this->CommerceQuery->show($request, $id);
+        return $this->CommerceQuery->show($request);
     }
 
     /**
@@ -175,7 +163,7 @@ class CommerceController extends Controller
      *     )
      */
     public function display(Request $request, $id)
-    {        
+    {
         return $this->CommerceQuery->display($request, $id);
     }
 

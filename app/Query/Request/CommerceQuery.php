@@ -13,12 +13,33 @@ class CommerceQuery implements ICommerceQuery
 
     public function index()
     {
-        return response()->json(['message' => 'Commerce Index!'], 201);
+        $commerces = Commerce::where('active', 1)->get();
+        return $commerces ?
+            response()->json($commerces, 200) :
+            response()->json(['message' => 'No Commerces!'], 404);
     }
 
-    public function show(Request $request, Int $id)
+    public function show(Request $request)
     {
-        $commerce = Commerce::find($id);
+
+        $object = new Commerce();
+        $object->id = $request->input('id');
+        $object->name = trim($request->input('name'));
+        $object->description = trim($request->input('name'));
+        $object->active = $request->input('active') ? $request->input('active') : 1;
+
+        $limit = $request->input('limit') ? $request->input('limit') : 3;
+        $sort = $request->input('sort') ? $request->input('sort') : 'ASC';
+        $page = $request->input('page') ? $request->input('page') : 1;
+
+        $commerce = $object->id ? Commerce::where('id', $object->id)->get() : null;
+        $commerce = $object->name && !$commerce ?
+            Commerce::where('name', 'LIKE', '%' . $object->name . '%')->get() :
+            Commerce::select()
+            ->active($object->active)
+            ->orderBy('id',  $sort)
+            ->paginate($limit, ['*'], '', $page);
+
         return $commerce ?
             response()->json($commerce, 200) :
             response()->json(['message' => 'Commerce no exist!'], 404);
@@ -40,7 +61,7 @@ class CommerceQuery implements ICommerceQuery
 
     public function display(Request $request, String $id)
     {
-        $commerce = Commerce::where('name','LIKE',$id)->first();
+        $commerce = Commerce::where('name', 'LIKE', $id)->first();
         return $commerce ?
             response()->json($commerce, 200) :
             response()->json(['message' => 'Commerce no exist!'], 404);
@@ -50,11 +71,9 @@ class CommerceQuery implements ICommerceQuery
     {
         return response()->json(['message' => 'Commerce update!'], 201);
     }
-    
+
     public function destroy(Int $id)
     {
         return response()->json(['message' => 'Commerce destroy!'], 201);
     }
-
-    
 }

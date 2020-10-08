@@ -81,7 +81,7 @@
                 ]
             }
         },
-        "/commerce/show/{id}": {
+        "/commerce/show": {
             "get": {
                 "tags": [
                     "Commerce"
@@ -92,11 +92,20 @@
                 "parameters": [
                     {
                         "name": "id",
-                        "in": "path",
+                        "in": "query",
                         "description": "Commerce id",
-                        "required": true,
+                        "required": false,
                         "schema": {
                             "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Commerce name",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
                         }
                     }
                 ],
@@ -110,12 +119,7 @@
                     "403": {
                         "description": "Forbidden"
                     }
-                },
-                "security": [
-                    {
-                        "bearer": []
-                    }
-                ]
+                }
             }
         },
         "/commerce/display/{id}": {
@@ -437,6 +441,12 @@
                 "title": "Commerce",
                 "description": "Commerce body data",
                 "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "Id of the commerce",
+                        "type": "string",
+                        "example": "1"
+                    },
                     "name": {
                         "title": "name",
                         "description": "Name of the commerce",

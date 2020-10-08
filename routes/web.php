@@ -17,4 +17,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/sendinvoice', 'Api\CommerceController@create');
+Route::get('/sendinvoice', 'Api\InvoiceController@create');

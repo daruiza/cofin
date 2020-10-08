@@ -16,20 +16,20 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'auth'], function () {
     Route::post('login', 'Auth\AuthController@login')->name('login');
-    Route::post('signup', 'Auth\AuthController@signup')->name('signup');    
+    Route::post('signup', 'Auth\AuthController@signup')->name('signup');
 
     Route::group(['middleware' => 'auth:api'], function () {
         Route::get('logout', 'Auth\AuthController@logout');
-        Route::get('user', 'Auth\AuthController@user');    
+        Route::get('user', 'Auth\AuthController@user');
     });
 });
 
 Route::group(['prefix' => 'commerce'], function () {
     Route::group(['middleware' => 'auth:api'], function () {
         Route::get('index', 'Api\CommerceController@index');
-        Route::get('show/{id}', 'Api\CommerceController@show');
         Route::post('store', 'Api\CommerceController@store');
     });
+    Route::get('show', 'Api\CommerceController@show');
 });
 
 Route::group(['prefix' => 'customer'], function () {

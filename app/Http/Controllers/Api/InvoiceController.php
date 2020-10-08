@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 use App\Query\Abstraction\IInvoiceQuery;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendInvoice;
+use App\Model\Core\Invoice;
+
 class InvoiceController extends Controller
 {
     private $InvoiceQuery;
@@ -39,7 +43,19 @@ class InvoiceController extends Controller
      *     )
      */
     public function index()
-    {   
+    {
+
+        // consultamos las facturas vigentes
+        foreach (Invoice::where('invoices_status_id', 2)->get() as $invoice) {
+            $data = (object) array(
+                'owner' => $invoice->customer->commerce->owner->toArray(),
+                'commerce' => $invoice->customer->commerce->toArray(),
+                'invoice' => $invoice->toArray(),
+                'customer' => $invoice->customer->user->toArray(),
+            );
+
+            Mail::to($data->customer['email'])->send(new SendInvoice($data));
+        }
         return $this->InvoiceQuery->index();
     }
 
@@ -83,6 +99,4 @@ class InvoiceController extends Controller
     {
         return $this->InvoiceQuery->store($request);
     }
-
-
 }

@@ -9,6 +9,17 @@
 class Commerce {
     /**
      * @OA\Property(
+     *      title="id",
+     *      description="Id of the commerce",
+     *      example="1"
+     * )
+     *
+     * @var string
+     */
+    public $id;
+    
+    /**
+     * @OA\Property(
      *      title="name",
      *      description="Name of the commerce",
      *      example="TempoSolutions"

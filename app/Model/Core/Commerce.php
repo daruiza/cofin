@@ -23,6 +23,13 @@ class Commerce extends Model
         'active'
     ];
 
+    public function scopeActive($query, $active)
+    {
+        return $active ? 
+        $query->where('active', intval($active)) : 
+        $query->where('active', 1);        
+    }
+
     public function owner()
     {
         return $this->belongsTo(User::class,  'id', 'commerce_id')->where('rol_id', 2);
