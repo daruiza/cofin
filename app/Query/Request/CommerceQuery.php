@@ -32,13 +32,18 @@ class CommerceQuery implements ICommerceQuery
         $sort = $request->input('sort') ? $request->input('sort') : 'ASC';
         $page = $request->input('page') ? $request->input('page') : 1;
 
-        $commerce = $object->id ? Commerce::where('id', $object->id)->get() : null;
+        $commerce =  Commerce::select();
+
+        $commerce = $object->id ? $commerce->where('id', $object->id) : $commerce;
         $commerce = $object->name && !$commerce ?
-            Commerce::where('name', 'LIKE', '%' . $object->name . '%')->get() :
-            Commerce::select()
+            $commerce->where('name', 'LIKE', '%' . $object->name . '%') :
+            $commerce;
+
+        $commerce = $commerce
             ->active($object->active)
             ->orderBy('id',  $sort)
             ->paginate($limit, ['*'], '', $page);
+
 
         return $commerce ?
             response()->json($commerce, 200) :

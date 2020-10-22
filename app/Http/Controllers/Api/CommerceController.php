@@ -111,7 +111,52 @@ class CommerceController extends Controller
      *          @OA\Schema(
      *              type="string"
      *          )
-     *      ),  
+     *      ),
+     *      @OA\Parameter(
+     *          name="description",
+     *          description="Commerce Description",
+     *          required=false,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Parameter(
+     *          name="active",
+     *          description="Commerce active",
+     *          required=false,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Parameter(
+     *          name="limit",
+     *          description="Table Commerce limit",
+     *          required=false,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ), 
+     *      @OA\Parameter(
+     *          name="sort",
+     *          description="Table Commerce sort",
+     *          required=false,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),    
+     *      @OA\Parameter(
+     *          name="page",
+     *          description="Table Commerce page",
+     *          required=false,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ), 
      *      @OA\Response(
      *          response=200,
      *          description="Successful operation",
