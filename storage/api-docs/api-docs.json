@@ -266,7 +266,7 @@
                 ]
             }
         },
-        "/customer/show/{id}": {
+        "/customer/show": {
             "get": {
                 "tags": [
                     "Customer"
@@ -276,9 +276,9 @@
                 "operationId": "getIdCustomer",
                 "parameters": [
                     {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Customer id",
+                        "name": "identification",
+                        "in": "query",
+                        "description": "User identification",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -295,12 +295,7 @@
                     "403": {
                         "description": "Forbidden"
                     }
-                },
-                "security": [
-                    {
-                        "bearer": []
-                    }
-                ]
+                }
             }
         },
         "/invoice/index": {

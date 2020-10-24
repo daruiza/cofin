@@ -87,17 +87,16 @@ class CustomerController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/customer/show/{id}",
+     *      path="/customer/show",
      *      operationId="getIdCustomer",
      *      tags={"Customer"},
      *      summary="Get One IdCustomer",
      *      description="Return Customers",
-     *      security={ {"bearer": {} }},
      *      @OA\Parameter(
-     *          name="id",
-     *          description="Customer id",
+     *          name="identification",
+     *          description="User identification",
      *          required=true,
-     *          in="path",
+     *          in="query",
      *          @OA\Schema(
      *              type="integer"
      *          )
@@ -116,9 +115,9 @@ class CustomerController extends Controller
      *      )
      *     )
      */
-    public function show(Request $request, $id)
+    public function show(Request $request)
     {
-        return $this->CustomerQuery->show($request, $id);
+        return $this->CustomerQuery->show($request);
     }
 
     /**

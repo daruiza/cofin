@@ -14,6 +14,7 @@ class UserSeeder extends Seeder
 	public function run()
 	{
 		DB::table('users')->insert(array(
+			'identification' => 1039420535,
 			'name' => 'super',
 			'surname' => 'super',
 			'email' => 'super@yopmail.com',
@@ -25,6 +26,7 @@ class UserSeeder extends Seeder
 		));
 
 		DB::table('users')->insert(array(
+			'identification' => 1039420536,
 			'name' => 'admin',
 			'surname' => 'admin',
 			'email' => 'admin@yopmail.com',
@@ -36,6 +38,7 @@ class UserSeeder extends Seeder
 		));
 
 		DB::table('users')->insert(array(
+			'identification' => 1039420537,
 			'name' => 'perda',
 			'surname' => 'pedra',
 			'email' => 'pedra@yopmail.com',
@@ -47,6 +50,7 @@ class UserSeeder extends Seeder
 		));
 
 		DB::table('users')->insert(array(
+			'identification' => 1039420538,
 			'name' => 'Escamoso',
 			'surname' => 'Escamoso',
 			'email' => 'escamoso@yopmail.com',
