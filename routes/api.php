@@ -35,9 +35,10 @@ Route::group(['prefix' => 'commerce'], function () {
 Route::group(['prefix' => 'customer'], function () {
     Route::group(['middleware' => 'auth:api'], function () {
         Route::get('index', 'Api\CustomerController@index');
+        Route::get('show', 'Api\CustomerController@show');
         Route::post('store', 'Api\CustomerController@store');
     });
-    Route::get('show', 'Api\CustomerController@show');
+    Route::get('showbycommerce', 'Api\CustomerController@showByCommerce');
 });
 
 Route::group(['prefix' => 'invoice'], function () {
