@@ -38,7 +38,7 @@ class InvoicesSeeder extends Seeder
             'loopDate' => Carbon::now()->addWeek(1),			
             'loopDay' => 1,	
             'invoices_status_id' => 2,
-			'customer_id' => 2
+			'customer_id' => 1
 		));
 
     }
