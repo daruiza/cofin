@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\User;
 use App\Model\Core\Customer;
+use App\Model\Core\DocumentType;
 use Illuminate\Http\Request;
 use App\Query\Abstraction\ICustomerQuery;
 
@@ -29,6 +30,7 @@ class CustomerQuery implements ICustomerQuery
 
         $customerObject = new Customer();
         $customerObject->commerce_id = +$request->input('commerce_id');
+        $customerObject->invoices_status_id = +$request->input('invoices_status_id');
 
         $limit = $request->input('limit') ? $request->input('limit') : 3;
         $sort = $request->input('sort') ? $request->input('sort') : 'asc';
@@ -65,13 +67,16 @@ class CustomerQuery implements ICustomerQuery
             ], 404);
         }
 
-        $invoices_status_production = 2;
+        $invoices_status_production = $customerObject->invoices_status_id ? $customerObject->invoices_status_id : 2;
+
+        $invoicesid = 'invoices.id';
+        $invoicescustomer_id = 'invoices.customer_id';
 
         return response()->json([
             'user' => $user,
             'invoices' =>
             Customer::select(
-                'invoices.id',
+                $invoicesid,
                 'invoices.name',
                 'invoices.number',
                 'invoices.description',
@@ -81,18 +86,16 @@ class CustomerQuery implements ICustomerQuery
                 'invoices.loopDate',
                 'invoices.loopDay',
                 'invoices.invoices_status_id',
-                'invoices.customer_id',
+                $invoicescustomer_id,
                 DB::raw('SUM(price * volume) as total_price')
-            )
-
-                ->leftJoin('invoices', 'customers.id', '=', 'invoices.customer_id')
+            )->leftJoin('invoices', 'customers.id', '=', 'invoices.customer_id')
                 ->leftJoin('invoices_detail', 'invoices.id', '=', 'invoices_detail.invoice_id')
                 ->where('user_id', $user->id)
                 ->where('commerce_id', $customerObject->commerce_id)
                 ->where('invoices_status_id', $invoices_status_production)
                 ->orderBy('customers.id',  $sort)
                 ->groupBy(
-                    'invoices.id',
+                    $invoicesid,
                     'invoices.name',
                     'invoices.number',
                     'invoices.description',
@@ -102,8 +105,8 @@ class CustomerQuery implements ICustomerQuery
                     'invoices.loopDate',
                     'invoices.loopDay',
                     'invoices.invoices_status_id',
-                    'invoices.customer_id',
-                    'invoices_detail.invoice_id'
+                    $invoicescustomer_id,
+                    'invoices_detail.invoice_id',
                 )
                 ->paginate($limit, ['*'], '', $page)
         ], 200);
@@ -112,6 +115,12 @@ class CustomerQuery implements ICustomerQuery
         //     'user' => $user,
         //     'invoices' => $customer->invoices->where('invoices_status_id', $invoices_status_production)
         // ], 200);
+    }
+
+    public function documentTypes(Request $request)
+    {
+        $documentType =  DocumentType::all();
+        return response()->json($documentType, 201);
     }
 
     public function store(Request $request)

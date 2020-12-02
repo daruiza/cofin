@@ -56,7 +56,7 @@ class CustomerController extends Controller
 
     /**
      * @OA\Post(
-     *       path="/customer/store",
+     *      path="/customer/store",
      *      operationId="storeCustomer",
      *      tags={"Customer"},
      *      summary="Store Customer",
@@ -92,6 +92,7 @@ class CustomerController extends Controller
      *      tags={"Customer"},
      *      summary="Get One IdCustomer",
      *      description="Return Customers",
+     *      security={ {"bearer": {} }}, 
      *      @OA\Parameter(
      *          name="identification",
      *          description="User identification",
@@ -135,7 +136,7 @@ class CustomerController extends Controller
      *      operationId="getCustomerByCommerce",
      *      tags={"Customer"},
      *      summary="Get One Customer",
-     *      description="Return Customers",
+     *      description="Return Customers",     
      *      @OA\Parameter(
      *          name="identification",
      *          description="User identification",
@@ -153,7 +154,16 @@ class CustomerController extends Controller
      *          @OA\Schema(
      *              type="integer"
      *          )
-     *      ),  
+     *      ),
+     *      @OA\Parameter(
+     *          name="invoices_status_id",
+     *          description="Commerce Id",
+     *          required=false,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
      *      @OA\Response(
      *          response=200,
      *          description="Successful operation",
@@ -171,6 +181,32 @@ class CustomerController extends Controller
     public function showByCommerce(Request $request)
     {
         return $this->CustomerQuery->showByCommerce($request);
+    }
+
+    /**
+     * @OA\Get(
+     *      path="/customer/documenttypes",
+     *      operationId="getDocumentTypes",
+     *      tags={"Customer"},
+     *      summary="Get Document Types",
+     *      description="Return Document Types",     
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated"
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *     )
+     */
+    public function documentTypes(Request $request)
+    {
+        return $this->CustomerQuery->documentTypes($request);
     }
 
     /**
