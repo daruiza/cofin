@@ -34,12 +34,12 @@ class DocumentTypesSeeder extends Seeder
 
 		DB::table('document_type')->insert(array(			
 			'iso' => 'IDC',
-            'description' => 'Identificador único de cliente, para el caso de ID’s únicos de clientes/usuarios de servicios públicos'
+            'description' => 'Identificador único de cliente'
 		));
 
 		DB::table('document_type')->insert(array(			
 			'iso' => 'CEL',
-            'description' => 'En caso de identificarse a través de la línea del móvil'
+            'description' => 'Número móvil'
 		));
 
 		DB::table('document_type')->insert(array(			
