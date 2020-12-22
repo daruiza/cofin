@@ -50,4 +50,11 @@ Route::group(['prefix' => 'invoice'], function () {
     });
 });
 
+Route::group(['prefix' => 'payupayment'], function () {
+    Route::group(['middleware' => 'auth:api'], function () {
+    });
+    Route::get('index', 'Api\PayuPaymentController@index');
+});
+
+
 Route::get('/{commerce}', 'Api\CommerceController@display');

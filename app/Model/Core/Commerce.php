@@ -20,6 +20,8 @@ class Commerce extends Model
         'logo',
         'currency',
         'label',
+        'apiLogin',
+        'apiKey',
         'active'
     ];
 

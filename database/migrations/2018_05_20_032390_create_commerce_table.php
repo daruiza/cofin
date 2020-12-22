@@ -24,6 +24,8 @@ class CreateCommerceTable extends Migration
             $table->string('logo', 256)->default('default.png');
             $table->string('currency', 32)->default('COP');
             $table->string('label',1024)->nullable()->default('');
+            $table->string('apiLogin',128)->nullable()->default('');
+            $table->string('apiKey',128)->nullable()->default('');
             $table->boolean('active')->default(true);            
             $table->timestamps();
         });

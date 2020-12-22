@@ -12,6 +12,9 @@ class CommercesSeeder extends Seeder
      */
     public function run()
     {
+		$apiLogin = '58R4DHj7iE1L48E';
+		$apiKey = '7C1Y8cqoPP7r8m29a8ik1X33Bj';
+
         DB::table('commerces')->insert(array(        	
 			'name'=>'Fabrica Romano',
 			'nit'=>'1039420535-1',
@@ -21,6 +24,8 @@ class CommercesSeeder extends Seeder
 			'description'=>'default store',
 			'logo'=>'default.png',
 			'currency'=>'COP',
+			'apiLogin' => $apiLogin,
+			'apiKey' => $apiKey,
 			'label'=>'',
 			)
 		);		
@@ -34,6 +39,8 @@ class CommercesSeeder extends Seeder
 			'description'=>'tempo store',
 			'logo'=>'tempo.png',
 			'currency'=>'COP',
+			'apiLogin' => $apiLogin,
+			'apiKey' => $apiKey,
 			'label'=>'',
 			)
 		);	
@@ -47,6 +54,8 @@ class CommercesSeeder extends Seeder
 			'description'=>'mrs store',
 			'logo'=>'mrs.png',
 			'currency'=>'COP',
+			'apiLogin' => $apiLogin,
+			'apiKey' => $apiKey,
 			'label'=>'',
 			)
 		);	
@@ -60,6 +69,8 @@ class CommercesSeeder extends Seeder
 			'description'=>'glitch store',
 			'logo'=>'glitch34.png',
 			'currency'=>'COP',
+			'apiLogin' => $apiLogin,
+			'apiKey' => $apiKey,
 			'label'=>'',
 			)
 		);	
@@ -73,6 +84,8 @@ class CommercesSeeder extends Seeder
 			'description'=>'five store',
 			'logo'=>'glitch300.png',
 			'currency'=>'COP',
+			'apiLogin' => $apiLogin,
+			'apiKey' => $apiKey,
 			'label'=>'',
 			)
 		);	
@@ -86,6 +99,8 @@ class CommercesSeeder extends Seeder
 			'description'=>'six store',
 			'logo'=>'six.png',
 			'currency'=>'COP',
+			'apiLogin' => $apiLogin,
+			'apiKey' => $apiKey,
 			'label'=>'',
 			)
 		);
@@ -99,6 +114,8 @@ class CommercesSeeder extends Seeder
 			'description'=>'combox store',
 			'logo'=>'conbox.png',
 			'currency'=>'COP',
+			'apiLogin' => $apiLogin,
+			'apiKey' => $apiKey,
 			'label'=>'',
 			)
 		);	
@@ -112,6 +129,8 @@ class CommercesSeeder extends Seeder
 			'description'=>'macalu store',
 			'logo'=>'macalu.png',
 			'currency'=>'COP',
+			'apiLogin' => $apiLogin,
+			'apiKey' => $apiKey,
 			'label'=>'',
 			)
 		);	
@@ -125,6 +144,8 @@ class CommercesSeeder extends Seeder
 			'description'=>'cocolu store',
 			'logo'=>'cocolu.png',
 			'currency'=>'COP',
+			'apiLogin' => $apiLogin,
+			'apiKey' => $apiKey,
 			'label'=>'',
 			)
 		);
@@ -138,6 +159,8 @@ class CommercesSeeder extends Seeder
 			'description'=>'coPidefault store',
 			'logo'=>'default.png',
 			'currency'=>'COP',
+			'apiLogin' => $apiLogin,
+			'apiKey' => $apiKey,
 			'label'=>'',
 			)
 		);		
@@ -151,6 +174,8 @@ class CommercesSeeder extends Seeder
 			'description'=>'coPitempo store',
 			'logo'=>'tempo.png',
 			'currency'=>'COP',
+			'apiLogin' => $apiLogin,
+			'apiKey' => $apiKey,
 			'label'=>'',
 			)
 		);	
@@ -164,6 +189,8 @@ class CommercesSeeder extends Seeder
 			'description'=>'coPimrs store',
 			'logo'=>'mrs.png',
 			'currency'=>'COP',
+			'apiLogin' => $apiLogin,
+			'apiKey' => $apiKey,
 			'label'=>'',
 			)
 		);	
@@ -177,6 +204,8 @@ class CommercesSeeder extends Seeder
 			'description'=>'coPiglitch store',
 			'logo'=>'glitch.png',
 			'currency'=>'COP',
+			'apiLogin' => $apiLogin,
+			'apiKey' => $apiKey,
 			'label'=>'',
 			)
 		);	
@@ -190,6 +219,8 @@ class CommercesSeeder extends Seeder
 			'description'=>'coPifive store',
 			'logo'=>'glitch.png',
 			'currency'=>'COP',
+			'apiLogin' => $apiLogin,
+			'apiKey' => $apiKey,
 			'label'=>'',
 			)
 		);	
@@ -203,6 +234,8 @@ class CommercesSeeder extends Seeder
 			'description'=>'coPisix store',
 			'logo'=>'six.png',
 			'currency'=>'COP',
+			'apiLogin' => $apiLogin,
+			'apiKey' => $apiKey,
 			'label'=>'',
 			)
 		);
@@ -216,6 +249,8 @@ class CommercesSeeder extends Seeder
 			'description'=>'coPicombox store',
 			'logo'=>'conbox.png',
 			'currency'=>'COP',
+			'apiLogin' => $apiLogin,
+			'apiKey' => $apiKey,
 			'label'=>'',
 			)
 		);	
@@ -229,6 +264,8 @@ class CommercesSeeder extends Seeder
 			'description'=>'coPimacalu store',
 			'logo'=>'macalu.png',
 			'currency'=>'COP',
+			'apiLogin' => $apiLogin,
+			'apiKey' => $apiKey,
 			'label'=>'',
 			)
 		);	
@@ -242,6 +279,8 @@ class CommercesSeeder extends Seeder
 			'description'=>'coPicocolu store',
 			'logo'=>'cocolu.png',
 			'currency'=>'COP',
+			'apiLogin' => $apiLogin,
+			'apiKey' => $apiKey,
 			'label'=>'',
 			)
 		);
