@@ -54,5 +54,40 @@ class PayuPaymentController extends Controller
     {   
         return $this->PayuPaymentQuery->index($request);
     }
+
+    /**
+     * @OA\Get(
+     *      path="/payupayment/banklist",
+     *      operationId="getBankListPayU",
+     *      tags={"PayUPayment"},
+     *      summary="Get Bank List PayU",
+     *      description="Return bank list",    
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="Commerce id",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),       
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated"
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *     )
+     */
+    public function bankList(Request $request)
+    {   
+        return $this->PayuPaymentQuery->bankList($request);
+    }
    
 }

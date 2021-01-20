@@ -24,18 +24,48 @@ class PayuPaymentQuery implements IPayuPaymentQuery
         $response = Http::withHeaders([
             'Accept' => 'application/json'
         ])->post(
-            env('APP_PAYU_URL'),
+            env('APP_PAYU_URL_REPORTS'),
             [
                 'test' => env('APP_PAYU_TEST'),
                 'language' => env('APP_PAYU_LANGUAGE'),
                 'command' => 'PING',
                 'merchant' => $this->merchant($commerce)
             ]
-
         );
-
+        
         return response()->json($response->json(), $response->status());
     }
+
+    public function bankList(Request $request)
+    {
+        if(!$request->input('id')) {
+            return response()->json(['message' => 'Commerce exist!'], 400);
+        }
+        try {
+            $commerce = Commerce::findOrFail($request->input('id'));
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 400);
+        }
+
+        $response = Http::withHeaders([
+            'Accept' => 'application/json'
+        ])->post(
+            env('APP_PAYU_URL_PAYMENTS'),
+            [
+                'test' => env('APP_PAYU_TEST'),
+                'language' => env('APP_PAYU_LANGUAGE'),
+                'command' => 'GET_BANKS_LIST',
+                'merchant' => $this->merchant($commerce),
+                'bankListInformation' => [
+                    'paymentMethod'=> 'PSE',
+                    'paymentCountry' => 'CO'
+                ]
+            ]
+        );
+        
+        return response()->json($response->json(), $response->status());
+    }
+
 
     public function show(Request $request, int $id)
     {

@@ -54,6 +54,7 @@ Route::group(['prefix' => 'payupayment'], function () {
     Route::group(['middleware' => 'auth:api'], function () {
     });
     Route::get('index', 'Api\PayuPaymentController@index');
+    Route::get('banklist', 'Api\PayuPaymentController@bankList');
 });
 
 
