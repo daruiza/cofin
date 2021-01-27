@@ -47,6 +47,10 @@ use Illuminate\Routing\Controller as BaseController;
  *     description="API EndPoints of Invoice"
  * ) 
  * 
+ * @OA\Tag(
+ *     name="EPaycoPayment",
+ *     description="API EndPoints of EPaycoPayment"
+ * ) 
  * 
  * @OA\SecuritySchemes(
  *     securityDefinition="bearer",
