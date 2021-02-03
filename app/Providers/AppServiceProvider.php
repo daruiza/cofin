@@ -24,6 +24,9 @@ use App\Query\Abstraction\IPayuPaymentQuery;
 use App\Query\Request\PayuPaymentQuery;
 use App\Http\Controllers\Api\PayuPaymentController;
 
+use App\Query\Abstraction\IEpaycoPaymentQuery;
+use App\Query\Request\EpaycoPaymentQuery;
+use App\Http\Controllers\Api\EPaycoPaymentController;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -47,6 +50,9 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(IPayuPaymentQuery::class, PayuPaymentQuery::class);
         $this->app->make(PayuPaymentController::class);        
+
+        $this->app->bind(IEpaycoPaymentQuery::class, EpaycoPaymentQuery::class);
+        $this->app->make(EPaycoPaymentController::class);        
     }
 
     /**

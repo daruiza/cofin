@@ -12,12 +12,30 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
 {
     public function index(Request $request)
     {
-        return response()->json(['message' => 'EPayco index!'], 201);
+        return response()->json(['message' => 'EPayco iNDEX!'], 201);
     }
 
-    public function bankList(Request $request)
+    public function bankList(Request $request, $id)
     {
-        return response()->json(['message' => 'EPayco bacnList!'], 201);
+        if (!$id) {
+            return response()->json(['message' => 'Commerce exist!'], 400);
+        }
+        try {
+            $commerce = Commerce::findOrFail($id);
+            $response = Http::withHeaders([
+                'Accept' => 'application/json'
+            ])->get(
+                env('APP_EPAYCO_URL_BANKS', 'https://secure.payco.co/restpagos/pse/bancos.json'),
+                [
+                    'public_key' => 'ff5bc2b276e6ec690e3162727eb78ebb',
+                ]
+            );
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 400);
+        }
+
+
+        return response()->json($response->json(), $response->status());
     }
 
 

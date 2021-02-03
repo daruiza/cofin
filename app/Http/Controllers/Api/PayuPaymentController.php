@@ -31,7 +31,7 @@ class PayuPaymentController extends Controller
      *          name="id",
      *          description="Commerce id",
      *          required=true,
-     *          in="query",
+     *          in="path",
      *          @OA\Schema(
      *              type="integer"
      *          )
@@ -61,16 +61,7 @@ class PayuPaymentController extends Controller
      *      operationId="getBankListPayU",
      *      tags={"PayUPayment"},
      *      summary="Get Bank List PayU",
-     *      description="Return bank list",    
-     *      @OA\Parameter(
-     *          name="id",
-     *          description="Commerce id",
-     *          required=true,
-     *          in="query",
-     *          @OA\Schema(
-     *              type="integer"
-     *          )
-     *      ),       
+     *      description="Return bank list",
      *      @OA\Response(
      *          response=200,
      *          description="Successful operation",

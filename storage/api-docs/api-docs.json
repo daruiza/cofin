@@ -394,7 +394,7 @@
                 "parameters": [
                     {
                         "name": "id",
-                        "in": "query",
+                        "in": "path",
                         "description": "Commerce id",
                         "required": true,
                         "schema": {
@@ -415,7 +415,7 @@
                 }
             }
         },
-        "/epaycopayment/banklist": {
+        "/epaycopayment/banklist/{id}": {
             "get": {
                 "tags": [
                     "EPaycoPayment"
@@ -426,7 +426,7 @@
                 "parameters": [
                     {
                         "name": "id",
-                        "in": "query",
+                        "in": "path",
                         "description": "Commerce id",
                         "required": true,
                         "schema": {
@@ -520,7 +520,7 @@
                 "parameters": [
                     {
                         "name": "id",
-                        "in": "query",
+                        "in": "path",
                         "description": "Commerce id",
                         "required": true,
                         "schema": {
@@ -549,17 +549,6 @@
                 "summary": "Get Bank List PayU",
                 "description": "Return bank list",
                 "operationId": "getBankListPayU",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "query",
-                        "description": "Commerce id",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation"

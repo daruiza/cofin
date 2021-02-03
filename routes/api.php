@@ -57,5 +57,12 @@ Route::group(['prefix' => 'payupayment'], function () {
     Route::get('banklist', 'Api\PayuPaymentController@bankList');
 });
 
+Route::group(['prefix' => 'epaycopayment'], function () {
+    Route::group(['middleware' => 'auth:api'], function () {
+    });
+    Route::get('index', 'Api\EPaycoPaymentController@index');
+    Route::get('banklist/{id}', 'Api\EPaycoPaymentController@bankList');
+});
+
 
 Route::get('/{commerce}', 'Api\CommerceController@display');

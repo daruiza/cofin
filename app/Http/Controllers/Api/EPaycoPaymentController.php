@@ -5,17 +5,17 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Query\Abstraction\IEPaycoPaymentQuery;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendInvoice;
 use App\Model\Core\Invoice;
+use App\Query\Abstraction\IEpaycoPaymentQuery;
 
 class EPaycoPaymentController extends Controller
 {
     private $EPaycoPaymentQuery;
 
-    public function __construct(IEPaycoPaymentQuery $EPaycoPaymentQuery)
+    public function __construct(IEpaycoPaymentQuery $EPaycoPaymentQuery)
     {
         $this->EPaycoPaymentQuery = $EPaycoPaymentQuery;
     }
@@ -31,7 +31,7 @@ class EPaycoPaymentController extends Controller
      *          name="id",
      *          description="Commerce id",
      *          required=true,
-     *          in="query",
+     *          in="path",
      *          @OA\Schema(
      *              type="integer"
      *          )
@@ -52,12 +52,12 @@ class EPaycoPaymentController extends Controller
      */
     public function index(Request $request)
     {   
-        return $this->PayuPaymentQuery->index($request);
+        return $this->EPaycoPaymentQuery->index($request);
     }
 
     /**
      * @OA\Get(
-     *      path="/epaycopayment/banklist",
+     *      path="/epaycopayment/banklist/{id}",
      *      operationId="getBankListEpayco",
      *      tags={"EPaycoPayment"},
      *      summary="Get Bank List EPayco",
@@ -66,7 +66,7 @@ class EPaycoPaymentController extends Controller
      *          name="id",
      *          description="Commerce id",
      *          required=true,
-     *          in="query",
+     *          in="path",
      *          @OA\Schema(
      *              type="integer"
      *          )
@@ -85,9 +85,9 @@ class EPaycoPaymentController extends Controller
      *      )
      *     )
      */
-    public function bankList(Request $request)
+    public function bankList(Request $request, $id)
     {   
-        return $this->PayuPaymentQuery->bankList($request);
+        return $this->EPaycoPaymentQuery->bankList($request, $id);
     }
    
 }
