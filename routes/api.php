@@ -62,6 +62,7 @@ Route::group(['prefix' => 'epaycopayment'], function () {
     });
     Route::get('index', 'Api\EPaycoPaymentController@index');
     Route::get('banklist/{id}', 'Api\EPaycoPaymentController@bankList');
+    Route::post('storetransaction/{id}', 'Api\EPaycoPaymentController@storetransaction');
 });
 
 

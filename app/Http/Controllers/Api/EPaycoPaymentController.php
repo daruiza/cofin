@@ -89,5 +89,44 @@ class EPaycoPaymentController extends Controller
     {   
         return $this->EPaycoPaymentQuery->bankList($request, $id);
     }
+
+    /**
+     * @OA\Post(
+     *      path="/epaycopayment/storetransaction/{id}",
+     *      operationId="storeTransaction",
+     *      tags={"EPaycoPayment"},
+     *      summary="Create a Transaction",
+     *      description="Return a Transaction",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="Commerce id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),    
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(ref="#/components/schemas/Transaction")
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *     )
+     */
+    public function storeTransaction(Request $request, $id)
+    {   
+        return $this->EPaycoPaymentQuery->storeTransaction($request, $id);
+    }
    
 }
