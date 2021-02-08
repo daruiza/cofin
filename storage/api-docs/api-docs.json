@@ -889,32 +889,32 @@
                 "title": "Transaction",
                 "description": "Transaction body data",
                 "properties": {
-                    "banco": {
-                        "title": "banco",
+                    "bank": {
+                        "title": "bank",
                         "description": "Código del Banco",
                         "type": "integer",
                         "example": "banco"
                     },
-                    "tipo_doc": {
-                        "title": "tipo_doc",
+                    "doc_type": {
+                        "title": "doc_type",
                         "description": "(CC,CE,PPN,SSN,LIC,NIT,DNI)",
                         "type": "string",
                         "example": "CC"
                     },
-                    "documento": {
-                        "title": "documento",
+                    "doc_number": {
+                        "title": "doc_number",
                         "description": "Número de identificación",
                         "type": "string",
                         "example": "0000AB"
                     },
-                    "nombres": {
-                        "title": "nombres",
+                    "name": {
+                        "title": "name",
                         "description": "Nombres del usuario",
                         "type": "string",
                         "example": "Nombres de usuario"
                     },
-                    "apellidos": {
-                        "title": "apellidos",
+                    "last_name": {
+                        "title": "last_name",
                         "description": "Apellidos del usuario",
                         "type": "string",
                         "example": "Apellido de usuario"
@@ -925,104 +925,68 @@
                         "type": "string",
                         "example": "Correo electrónico del usuario"
                     },
-                    "pais": {
-                        "title": "pais",
+                    "country": {
+                        "title": "country",
                         "description": "País en formato ISO ejemplo: Colombia = CO",
                         "type": "string",
                         "example": "CO"
                     },
-                    "depto": {
-                        "title": "depto",
-                        "description": "Departamento/Estado/Región del usuario ejemplo: Antioquia",
-                        "type": "string",
-                        "example": "Antioquia"
-                    },
-                    "ciudad": {
-                        "title": "ciudad",
-                        "description": "Ciudad de residencia del usuario ejemplo: Medellín",
-                        "type": "string",
-                        "example": "Medellín"
-                    },
-                    "celular": {
-                        "title": "celular",
+                    "cell_phone": {
+                        "title": "cell_phone",
                         "description": "Número de celular del usuario",
                         "type": "string",
                         "example": "+570000"
                     },
-                    "direccion": {
-                        "title": "direccion",
-                        "description": "Dirección de residencia u oficina",
-                        "type": "string",
-                        "example": "Cll 0 #0-0"
-                    },
-                    "factura": {
-                        "title": "factura",
+                    "invoice": {
+                        "title": "invoice",
                         "description": "Numero de factura",
                         "type": "string",
                         "example": "FA0000"
                     },
-                    "descripcion": {
-                        "title": "descripcion",
+                    "description": {
+                        "title": "description",
                         "description": "Descipción del producto",
                         "type": "string",
                         "example": "Descipción del producto"
                     },
-                    "iva": {
-                        "title": "iva",
+                    "tax": {
+                        "title": "tax",
                         "description": "iva factura, si no se calcula mandar el valor en 0",
                         "type": "string",
                         "example": "0"
                     },
-                    "baseiva": {
-                        "title": "baseiva",
+                    "tax_base": {
+                        "title": "tax_base",
                         "description": "Base iva de la factura,es la base del producto a vender",
                         "type": "string",
                         "example": "0"
                     },
-                    "valor": {
-                        "title": "valor",
+                    "value": {
+                        "title": "value",
                         "description": "Valor total de la compra, si se calcula el iva y base iva debe ser coincidir con la suma del baseiva + iva",
                         "type": "string",
                         "example": "1000000"
                     },
-                    "moneda": {
-                        "title": "moneda",
+                    "currency": {
+                        "title": "currency",
                         "description": "Moneda predeterminada COP (Peso colombiano)",
                         "type": "string",
                         "example": "COP"
                     },
-                    "i": {
-                        "title": "i",
-                        "description": "vector de inicialización, puede ser estático o dinámico siempre de 16 carcteres, enviarlo codificao en base 64",
-                        "type": "string",
-                        "example": "COP"
-                    },
-                    "enpruebas": {
-                        "title": "enpruebas",
-                        "description": "modo prueba=(TRUE), modo producción=(FALSE)",
-                        "type": "string",
-                        "example": "TRUE"
-                    },
-                    "lenguaje": {
-                        "title": "lenguaje",
-                        "description": "lenguaje del cliente utilizado para hacer la petición a la rest(javascript,php, java, .net, ios, anroid, etc)",
-                        "type": "string",
-                        "example": "php"
-                    },
-                    "url_respuesta": {
-                        "title": "url_respuesta",
+                    "url_response": {
+                        "title": "url_response",
                         "description": "Url de respuesta final de la transacción, donde el cliente será redireccionado después de finalizar la compra en la pasarela de pagos",
                         "type": "string",
                         "example": "/"
                     },
-                    "url_confirmacion": {
-                        "title": "url_confirmacion",
+                    "url_confirmation": {
+                        "title": "url_confirmation",
                         "description": "Url de confirmación de la transacción donde se enviarán variables de respuesta confirmando la aceptación o negación de la transacción en caso de que la misma quede pendiente",
                         "type": "string",
                         "example": "/"
                     },
-                    "metodoconfirmacion": {
-                        "title": "metodoconfirmacion",
+                    "method_confirmation": {
+                        "title": "method_confirmation",
                         "description": "Método (POST O GET) para enviar las variables de confirmación de la transacción",
                         "type": "string",
                         "example": "POST"

@@ -42,7 +42,6 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
 
     public function storeTransaction(Request $request, $id)
     {
-
         if (!$id) {
             return response()->json(['message' => 'Commerce exist!'], 400);
         }
@@ -57,24 +56,24 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
             ]);
 
             $data = array(
-                "bank" => "1007",
-                "invoice" => "1472050778",
-                "description" => "Pago pruebas",
-                "value" => "10000",
-                "tax" => "0",
-                "tax_base" => "0",
-                "currency" => "COP",
-                "type_person" => "0",
-                "doc_type" => "CC",
-                "doc_number" => "1039420535",
-                "name" => "daruiza",
-                "last_name" => "PAYCO",
-                "email" => "no-responder@payco.co",
-                "country" => "CO",
-                "cell_phone" => "3194062550",
-                "url_response" => " http://midominio.com/respuesta.html",
-                "url_confirmation" => "http://midominio.com/confirmation",
-                "method_confirmation" => "POST"
+                "bank" => $request->input('bank'),
+                "invoice" => $request->input('invoice'),
+                "description" =>$request->input('description'),
+                "value" => $request->input('value'),
+                "tax" => $request->input('tax'),
+                "tax_base" => $request->input('tax_base'),
+                "currency" => $request->input('currency'),
+                "type_person" => $request->input('type_person'),
+                "doc_type" => $request->input('doc_type'),
+                "doc_number" => $request->input('doc_number'),
+                "name" => $request->input('name'),
+                "last_name" => $request->input('last_name'),
+                "email" => $request->input('email'),
+                "country" => $request->input('country'),
+                "cell_phone" => $request->input('cell_phone'),
+                "url_response" =>$request->input('url_response'),
+                "url_confirmation" => $request->input('url_confirmation'),
+                "method_confirmation" => $request->input('method_confirmation')
             );
 
             $pse = $epayco->bank->create($data);

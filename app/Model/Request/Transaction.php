@@ -11,58 +11,58 @@ class Transaction
 {
     /**
      * @OA\Property(
-     *      title="banco",
+     *      title="bank",
      *      description="Código del Banco",
      *      example="banco"
      * )
      *tipo_doc
      * @var int
      */
-    public $banco;
+    public $bank;
 
     /**
      * @OA\Property(
-     *      title="tipo_doc",
+     *      title="doc_type",
      *      description="(CC,CE,PPN,SSN,LIC,NIT,DNI)",
      *      example="CC"
      * )
      *
      * @var string
      */
-    public $tipo_doc;
+    public $doc_type;
 
     /**
      * @OA\Property(
-     *      title="documento",
+     *      title="doc_number",
      *      description="Número de identificación",
      *      example="0000AB"
      * )
      *
      * @var string
      */
-    public $documento;
+    public $doc_number;
 
     /**
      * @OA\Property(
-     *      title="nombres",
+     *      title="name",
      *      description="Nombres del usuario",
      *      example="Nombres de usuario"
      * )
      *
      * @var string
      */
-    public $nombres;
+    public $name;
 
     /**
      * @OA\Property(
-     *      title="apellidos",
+     *      title="last_name",
      *      description="Apellidos del usuario",
      *      example="Apellido de usuario"
      * )
      *
      * @var string
      */
-    public $apellidos;
+    public $last_name;
 
     /**
      * @OA\Property(
@@ -77,84 +77,51 @@ class Transaction
 
     /**
      * @OA\Property(
-     *      title="pais",
+     *      title="country",
      *      description="País en formato ISO ejemplo: Colombia = CO",
      *      example="CO"
      * )
      *
      * @var string
      */
-    public $pais;
-
+    public $country;
+    
     /**
      * @OA\Property(
-     *      title="depto",
-     *      description="Departamento/Estado/Región del usuario ejemplo: Antioquia",
-     *      example="Antioquia"
-     * )
-     *
-     * @var string
-     */
-    public $depto;
-
-    /**
-     * @OA\Property(
-     *      title="ciudad",
-     *      description="Ciudad de residencia del usuario ejemplo: Medellín",
-     *      example="Medellín"
-     * )
-     *
-     * @var string
-     */
-    public $ciudad;
-
-    /**
-     * @OA\Property(
-     *      title="celular",
+     *      title="cell_phone",
      *      description="Número de celular del usuario",
      *      example="+570000"
      * )
      *
      * @var string
      */
-    public $celular;
+    public $cell_phone;    
 
     /**
      * @OA\Property(
-     *      title="direccion",
-     *      description="Dirección de residencia u oficina",
-     *      example="Cll 0 #0-0"
-     * )
-     *
-     * @var string
-     */
-    public $direccion;
-
-    /**
-     * @OA\Property(
-     *      title="factura",
+     *      title="invoice",
      *      description="Numero de factura",
      *      example="FA0000"
      * )
      *
      * @var string
      */
-    public $factura;
+    public $invoice;
 
     /**
      * @OA\Property(
-     *      title="descripcion",
+     *      title="description",
      *      description="Descipción del producto",
      *      example="Descipción del producto"
      * )
      *
      * @var string
      */
-    public $descripcion;
+    public $description;
 
     /**
      * @OA\Property(
-     *      title="iva",
+     *      title="tax",
      *      description="iva factura, si no se calcula mandar el valor en 0",
      *      example="0"
      * )
@@ -162,106 +129,73 @@ class Transaction
      * @var string
      */
 
-    public $iva;
+    public $tax;
 
     /**
      * @OA\Property(
-     *      title="baseiva",
+     *      title="tax_base",
      *      description="Base iva de la factura,es la base del producto a vender",
      *      example="0"
      * )
      *
      * @var string
      */
-    public $baseiva;
+    public $tax_base;
 
     /**
      * @OA\Property(
-     *      title="valor",
+     *      title="value",
      *      description="Valor total de la compra, si se calcula el iva y base iva debe ser coincidir con la suma del baseiva + iva",
      *      example="1000000"
      * )
      *
      * @var string
      */
-    public $valor;
+    public $value;
 
     /**
      * @OA\Property(
-     *      title="moneda",
+     *      title="currency",
      *      description="Moneda predeterminada COP (Peso colombiano)",
      *      example="COP"
      * )
      *
      * @var string
      */
-    public $moneda;
+    public $currency;
 
     /**
      * @OA\Property(
-     *      title="i",
-     *      description="vector de inicialización, puede ser estático o dinámico siempre de 16 carcteres, enviarlo codificao en base 64",
-     *      example="COP"
-     * )
-     *
-     * @var string
-     */
-    public $i;
-
-    /**
-     * @OA\Property(
-     *      title="enpruebas",
-     *      description="modo prueba=(TRUE), modo producción=(FALSE)",
-     *      example="TRUE"
-     * )
-     *
-     * @var string
-     */
-    public $enpruebas;
-
-    /**
-     * @OA\Property(
-     *      title="lenguaje",
-     *      description="lenguaje del cliente utilizado para hacer la petición a la rest(javascript,php, java, .net, ios, anroid, etc)",
-     *      example="php"
-     * )
-     *
-     * @var string
-     */
-    public $lenguaje;
-
-    /**
-     * @OA\Property(
-     *      title="url_respuesta",
+     *      title="url_response",
      *      description="Url de respuesta final de la transacción, donde el cliente será redireccionado después de finalizar la compra en la pasarela de pagos",
      *      example="/"
      * )
      *
      * @var string
      */
-    public $url_respuesta;
+    public $url_response;
 
     /**
      * @OA\Property(
-     *      title="url_confirmacion",
+     *      title="url_confirmation",
      *      description="Url de confirmación de la transacción donde se enviarán variables de respuesta confirmando la aceptación o negación de la transacción en caso de que la misma quede pendiente",
      *      example="/"
      * )
      *
      * @var string
      */
-    public $url_confirmacion;
+    public $url_confirmation;
 
     /**
      * @OA\Property(
-     *      title="metodoconfirmacion",
+     *      title="method_confirmation",
      *      description="Método (POST O GET) para enviar las variables de confirmación de la transacción",
      *      example="POST"
      * )
      *
      * @var string
      */
-    public $metodoconfirmacion;
+    public $method_confirmation;
 
 
 }
