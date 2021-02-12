@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\User;
 use App\Model\Core\Customer;
 use App\Model\Core\DocumentType;
+use App\Model\Core\PersonType;
 use Illuminate\Http\Request;
 use App\Query\Abstraction\ICustomerQuery;
 
@@ -122,6 +123,12 @@ class CustomerQuery implements ICustomerQuery
         $documentType =  DocumentType::all();
         return response()->json($documentType, 201);
     }
+
+    public function personTypes(Request $request)
+    {
+        $personType =  PersonType::all();
+        return response()->json($personType, 201);
+    }    
 
     public function store(Request $request)
     {

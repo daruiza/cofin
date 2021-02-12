@@ -40,6 +40,7 @@ Route::group(['prefix' => 'customer'], function () {
     });
     Route::get('showbycommerce', 'Api\CustomerController@showByCommerce');
     Route::get('documenttypes', 'Api\CustomerController@documentTypes');
+    Route::get('persontypes', 'Api\CustomerController@personTypes');
 });
 
 Route::group(['prefix' => 'invoice'], function () {

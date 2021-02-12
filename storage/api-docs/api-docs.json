@@ -383,6 +383,27 @@
                 }
             }
         },
+        "/customer/persontypes": {
+            "get": {
+                "tags": [
+                    "Customer"
+                ],
+                "summary": "Get Person Types",
+                "description": "Return Person Types",
+                "operationId": "getPersonTypes",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
         "/epaycopayment/index": {
             "get": {
                 "tags": [

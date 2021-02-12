@@ -9,7 +9,6 @@ use App\Query\Abstraction\ICustomerQuery;
 
 class CustomerController extends Controller
 {
-
     private $CustomerQuery;
 
     public function __construct(ICustomerQuery $CustomerQuery)
@@ -207,6 +206,32 @@ class CustomerController extends Controller
     public function documentTypes(Request $request)
     {
         return $this->CustomerQuery->documentTypes($request);
+    }
+
+    /**
+     * @OA\Get(
+     *      path="/customer/persontypes",
+     *      operationId="getPersonTypes",
+     *      tags={"Customer"},
+     *      summary="Get Person Types",
+     *      description="Return Person Types",     
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated"
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *     )
+     */
+    public function personTypes(Request $request)
+    {
+        return $this->CustomerQuery->personTypes($request);
     }
 
     /**

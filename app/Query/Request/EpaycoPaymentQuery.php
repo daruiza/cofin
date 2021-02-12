@@ -76,6 +76,8 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
                 "method_confirmation" => $request->input('method_confirmation')
             );
 
+            return response()->json($data, 201);
+            
             $pse = $epayco->bank->create($data);
            
         } catch (\Exception $e) {
