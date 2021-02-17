@@ -19,7 +19,7 @@ class PersonTypesSeeder extends Seeder
 
 		DB::table('person_type')->insert(array(			
 			'code' => '1',
-            'type' => 'Pesona Juridica'
+            'type' => 'Pesona Jurídica'
 		));
 		
     }
