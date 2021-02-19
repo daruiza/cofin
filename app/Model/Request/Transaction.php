@@ -166,6 +166,17 @@ class Transaction
 
     /**
      * @OA\Property(
+     *      title="type_person",
+     *      description="Tipo de Persona",
+     *      example="0"
+     * )
+     *
+     * @var string
+     */
+    public $type_person;
+
+    /**
+     * @OA\Property(
      *      title="url_response",
      *      description="Url de respuesta final de la transacción, donde el cliente será redireccionado después de finalizar la compra en la pasarela de pagos",
      *      example="/"

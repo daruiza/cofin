@@ -9,7 +9,6 @@ use App\Query\Abstraction\IEpaycoPaymentQuery;
 use App\Model\Core\Commerce;
 use Epayco\Epayco;
 use Epayco\Utils\PaycoAes;
-
 class EpaycoPaymentQuery implements IEpaycoPaymentQuery
 {
     public function index(Request $request)
@@ -60,22 +59,26 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
                 "invoice" => $request->input('invoice'),
                 "description" =>$request->input('description'),
                 "value" => $request->input('value'),
-                "tax" => $request->input('tax'),
-                "tax_base" => $request->input('tax_base'),
-                "currency" => $request->input('currency'),
                 "type_person" => $request->input('type_person'),
                 "doc_type" => $request->input('doc_type'),
                 "doc_number" => $request->input('doc_number'),
                 "name" => $request->input('name'),
                 "last_name" => $request->input('last_name'),
                 "email" => $request->input('email'),
-                "country" => $request->input('country'),
                 "cell_phone" => $request->input('cell_phone'),
+
+                "tax" => $request->input('tax'),
+                "tax_base" => $request->input('tax_base'),
+                "currency" => $request->input('currency'),
+                "country" => $request->input('country'),
                 "url_response" =>$request->input('url_response'),
                 "url_confirmation" => $request->input('url_confirmation'),
                 "method_confirmation" => $request->input('method_confirmation')
             );
 
+            
+
+            return response()->json(env('APP_EPAYCO_URL_BANKS'), 201);
             return response()->json($data, 201);
             
             $pse = $epayco->bank->create($data);

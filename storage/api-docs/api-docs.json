@@ -994,6 +994,12 @@
                         "type": "string",
                         "example": "COP"
                     },
+                    "type_person": {
+                        "title": "type_person",
+                        "description": "Tipo de Persona",
+                        "type": "string",
+                        "example": "0"
+                    },
                     "url_response": {
                         "title": "url_response",
                         "description": "Url de respuesta final de la transacción, donde el cliente será redireccionado después de finalizar la compra en la pasarela de pagos",
