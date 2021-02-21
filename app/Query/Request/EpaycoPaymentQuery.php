@@ -57,30 +57,26 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
             $data = array(
                 "bank" => $request->input('bank'),
                 "invoice" => $request->input('invoice'),
-                "description" =>$request->input('description'),
                 "value" => $request->input('value'),
                 "type_person" => $request->input('type_person'),
                 "doc_type" => $request->input('doc_type'),
                 "doc_number" => $request->input('doc_number'),
                 "name" => $request->input('name'),
-                "last_name" => $request->input('last_name'),
                 "email" => $request->input('email'),
                 "cell_phone" => $request->input('cell_phone'),
-
-                "tax" => $request->input('tax'),
-                "tax_base" => $request->input('tax_base'),
-                "currency" => $request->input('currency'),
-                "country" => $request->input('country'),
-                "url_response" =>$request->input('url_response'),
-                "url_confirmation" => $request->input('url_confirmation'),
-                "method_confirmation" => $request->input('method_confirmation')
-            );
-
+                "url_response" =>env('APP_URL').'api/'.$request->input('url_response'),
+                
+                "last_name" => '',
+                "description" =>'',
+                "tax" => env('APP_EPAYCO_TAX'),
+                "tax_base" => env('APP_EPAYCO_TAX_BASE'),
+                "currency" => env('APP_EPAYCO_CURRENCY'),
+                "country" => env('APP_EPAYCO_COUNTRY'),
+                "url_confirmation" => env('APP_EPAYCO_URL_CONFIRMATION'),
+                "method_confirmation" => env('APP_EPAYCO_METHOD_CONFIRMATION')
+            );            
             
-
-            return response()->json(env('APP_EPAYCO_URL_BANKS'), 201);
             return response()->json($data, 201);
-            
             $pse = $epayco->bank->create($data);
            
         } catch (\Exception $e) {

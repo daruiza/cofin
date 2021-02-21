@@ -55,17 +55,6 @@ class Transaction
 
     /**
      * @OA\Property(
-     *      title="last_name",
-     *      description="Apellidos del usuario",
-     *      example="Apellido de usuario"
-     * )
-     *
-     * @var string
-     */
-    public $last_name;
-
-    /**
-     * @OA\Property(
      *      title="email",
      *      description="Email del usuario",
      *      example="Correo electrónico del usuario"
@@ -77,17 +66,6 @@ class Transaction
 
     /**
      * @OA\Property(
-     *      title="country",
-     *      description="País en formato ISO ejemplo: Colombia = CO",
-     *      example="CO"
-     * )
-     *
-     * @var string
-     */
-    public $country;
-    
-    /**
-     * @OA\Property(
      *      title="cell_phone",
      *      description="Número de celular del usuario",
      *      example="+570000"
@@ -95,7 +73,7 @@ class Transaction
      *
      * @var string
      */
-    public $cell_phone;    
+    public $cell_phone;
 
     /**
      * @OA\Property(
@@ -108,39 +86,6 @@ class Transaction
      */
     public $invoice;
 
-    /**
-     * @OA\Property(
-     *      title="description",
-     *      description="Descipción del producto",
-     *      example="Descipción del producto"
-     * )
-     *
-     * @var string
-     */
-    public $description;
-
-    /**
-     * @OA\Property(
-     *      title="tax",
-     *      description="iva factura, si no se calcula mandar el valor en 0",
-     *      example="0"
-     * )
-     *
-     * @var string
-     */
-
-    public $tax;
-
-    /**
-     * @OA\Property(
-     *      title="tax_base",
-     *      description="Base iva de la factura,es la base del producto a vender",
-     *      example="0"
-     * )
-     *
-     * @var string
-     */
-    public $tax_base;
 
     /**
      * @OA\Property(
@@ -152,17 +97,6 @@ class Transaction
      * @var string
      */
     public $value;
-
-    /**
-     * @OA\Property(
-     *      title="currency",
-     *      description="Moneda predeterminada COP (Peso colombiano)",
-     *      example="COP"
-     * )
-     *
-     * @var string
-     */
-    public $currency;
 
     /**
      * @OA\Property(
@@ -185,28 +119,4 @@ class Transaction
      * @var string
      */
     public $url_response;
-
-    /**
-     * @OA\Property(
-     *      title="url_confirmation",
-     *      description="Url de confirmación de la transacción donde se enviarán variables de respuesta confirmando la aceptación o negación de la transacción en caso de que la misma quede pendiente",
-     *      example="/"
-     * )
-     *
-     * @var string
-     */
-    public $url_confirmation;
-
-    /**
-     * @OA\Property(
-     *      title="method_confirmation",
-     *      description="Método (POST O GET) para enviar las variables de confirmación de la transacción",
-     *      example="POST"
-     * )
-     *
-     * @var string
-     */
-    public $method_confirmation;
-
-
 }

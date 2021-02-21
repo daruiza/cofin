@@ -934,23 +934,11 @@
                         "type": "string",
                         "example": "Nombres de usuario"
                     },
-                    "last_name": {
-                        "title": "last_name",
-                        "description": "Apellidos del usuario",
-                        "type": "string",
-                        "example": "Apellido de usuario"
-                    },
                     "email": {
                         "title": "email",
                         "description": "Email del usuario",
                         "type": "string",
                         "example": "Correo electrónico del usuario"
-                    },
-                    "country": {
-                        "title": "country",
-                        "description": "País en formato ISO ejemplo: Colombia = CO",
-                        "type": "string",
-                        "example": "CO"
                     },
                     "cell_phone": {
                         "title": "cell_phone",
@@ -964,35 +952,11 @@
                         "type": "string",
                         "example": "FA0000"
                     },
-                    "description": {
-                        "title": "description",
-                        "description": "Descipción del producto",
-                        "type": "string",
-                        "example": "Descipción del producto"
-                    },
-                    "tax": {
-                        "title": "tax",
-                        "description": "iva factura, si no se calcula mandar el valor en 0",
-                        "type": "string",
-                        "example": "0"
-                    },
-                    "tax_base": {
-                        "title": "tax_base",
-                        "description": "Base iva de la factura,es la base del producto a vender",
-                        "type": "string",
-                        "example": "0"
-                    },
                     "value": {
                         "title": "value",
                         "description": "Valor total de la compra, si se calcula el iva y base iva debe ser coincidir con la suma del baseiva + iva",
                         "type": "string",
                         "example": "1000000"
-                    },
-                    "currency": {
-                        "title": "currency",
-                        "description": "Moneda predeterminada COP (Peso colombiano)",
-                        "type": "string",
-                        "example": "COP"
                     },
                     "type_person": {
                         "title": "type_person",
@@ -1005,18 +969,6 @@
                         "description": "Url de respuesta final de la transacción, donde el cliente será redireccionado después de finalizar la compra en la pasarela de pagos",
                         "type": "string",
                         "example": "/"
-                    },
-                    "url_confirmation": {
-                        "title": "url_confirmation",
-                        "description": "Url de confirmación de la transacción donde se enviarán variables de respuesta confirmando la aceptación o negación de la transacción en caso de que la misma quede pendiente",
-                        "type": "string",
-                        "example": "/"
-                    },
-                    "method_confirmation": {
-                        "title": "method_confirmation",
-                        "description": "Método (POST O GET) para enviar las variables de confirmación de la transacción",
-                        "type": "string",
-                        "example": "POST"
                     }
                 },
                 "type": "object"

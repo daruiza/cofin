@@ -45,6 +45,9 @@ class CustomerQuery implements ICustomerQuery
         $customer = $customerObject->commerce_id ? $customer->where('commerce_id', $customerObject->commerce_id) : $customer;
         $customer = $customer->get()->first();
 
+        // Se asigna el dato taltante de $Customer a $User
+        $user->document_type = $customer->document_type;
+
         $action = '!Advertencia';
 
         if (!$user) {
