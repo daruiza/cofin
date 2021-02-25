@@ -80,5 +80,4 @@ class PayuPaymentController extends Controller
     {   
         return $this->PayuPaymentQuery->bankList($request);
     }
-   
 }

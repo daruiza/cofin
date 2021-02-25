@@ -128,5 +128,10 @@ class EPaycoPaymentController extends Controller
     {   
         return $this->EPaycoPaymentQuery->storeTransaction($request, $id);
     }
+
+    public function confirmation(Request $request)
+    {   
+        return $this->EPaycoPaymentQuery->confirmation($request);
+    }
    
 }

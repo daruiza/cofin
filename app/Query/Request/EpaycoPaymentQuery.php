@@ -9,6 +9,8 @@ use App\Query\Abstraction\IEpaycoPaymentQuery;
 use App\Model\Core\Commerce;
 use Epayco\Epayco;
 use Epayco\Utils\PaycoAes;
+
+use Illuminate\Support\Facades\Log;
 class EpaycoPaymentQuery implements IEpaycoPaymentQuery
 {
     public function index(Request $request)
@@ -64,7 +66,6 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
                 "name" => $request->input('name'),
                 "email" => $request->input('email'),
                 "cell_phone" => $request->input('cell_phone'),
-                "url_response" =>env('APP_URL').'api/'.$request->input('url_response'),
                 
                 "last_name" => '',
                 "description" =>'',
@@ -72,17 +73,27 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
                 "tax_base" => env('APP_EPAYCO_TAX_BASE'),
                 "currency" => env('APP_EPAYCO_CURRENCY'),
                 "country" => env('APP_EPAYCO_COUNTRY'),
-                "url_confirmation" => env('APP_EPAYCO_URL_CONFIRMATION'),
+                "url_response" =>env('API_URL').'home/'.$request->input('url_response').''.$request->input('invoice'),
+                "url_confirmation" => env('APP_URL').'api/epaycopayment/'.env('APP_EPAYCO_URL_RESPONSE'),
                 "method_confirmation" => env('APP_EPAYCO_METHOD_CONFIRMATION')
             );            
             
-            return response()->json($data, 201);
+            Log::info('Data Create Epayco');
+            Log::info(json_encode($data));
             $pse = $epayco->bank->create($data);
-           
+            
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 400);
         }
+        Log::info(json_encode($pse));
         return response()->json($pse, 201);
+    }
+    
+    public function confirmation(Request $request)
+    {
+        Log::info('Request Confirmation Epayco');
+        Log::info(json_encode($request->input()));
+        return response()->json($request, 201);
     }
 
     public function show(Request $request, int $id)
