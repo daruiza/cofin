@@ -55,7 +55,6 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
                 'test' => false,
                 'lenguage' => 'php'
             ]);
-
             $data = array(
                 "bank" => $request->input('bank'),
                 "invoice" => $request->input('invoice'),
@@ -67,14 +66,14 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
                 "email" => $request->input('email'),
                 "cell_phone" => $request->input('cell_phone'),
                 
-                "last_name" => '',
+                "last_name" => $request->input('name'),
                 "description" =>'',
                 "tax" => env('APP_EPAYCO_TAX'),
                 "tax_base" => env('APP_EPAYCO_TAX_BASE'),
                 "currency" => env('APP_EPAYCO_CURRENCY'),
                 "country" => env('APP_EPAYCO_COUNTRY'),
-                "url_response" =>env('API_URL').'home/'.$request->input('url_response').''.$request->input('invoice'),
-                "url_confirmation" => env('APP_URL').'api/epaycopayment/'.env('APP_EPAYCO_URL_RESPONSE'),
+                "url_response" =>env('API_URL').'home/'.$request->input('url_response').'/'.$request->input('invoice'),
+                "url_confirmation" => env('APP_URL').'api/epaycopayment/'.env('APP_EPAYCO_URL_CONFIRMATION'),
                 "method_confirmation" => env('APP_EPAYCO_METHOD_CONFIRMATION')
             );            
             
