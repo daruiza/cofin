@@ -51,7 +51,7 @@ class EPaycoPaymentController extends Controller
      *     )
      */
     public function index(Request $request)
-    {   
+    {
         return $this->EPaycoPaymentQuery->index($request);
     }
 
@@ -86,14 +86,14 @@ class EPaycoPaymentController extends Controller
      *     )
      */
     public function bankList(Request $request, $id)
-    {   
+    {
         return $this->EPaycoPaymentQuery->bankList($request, $id);
     }
 
     /**
      * @OA\Post(
-     *      path="/epaycopayment/storetransaction/{id}",
-     *      operationId="storeTransaction",
+     *      path="/epaycopayment/store/{id}",
+     *      operationId="store",
      *      tags={"EPaycoPayment"},
      *      summary="Create a Transaction",
      *      description="Return a Transaction",
@@ -124,14 +124,48 @@ class EPaycoPaymentController extends Controller
      *      )
      *     )
      */
-    public function storeTransaction(Request $request, $id)
-    {   
-        return $this->EPaycoPaymentQuery->storeTransaction($request, $id);
+    public function store(Request $request, $id)
+    {
+        return $this->EPaycoPaymentQuery->store($request, $id);
+    }
+
+    /**
+     * @OA\Get(
+     *      path="/epaycopayment/show/{id}",
+     *      operationId="show",
+     *      tags={"EPaycoPayment"},
+     *      summary="Show a Transaction",
+     *      description="Return a Transaction",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="Invoice Id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *     )
+     */
+    public function show(Request $request, $id)
+    {
+        return $this->EPaycoPaymentQuery->show($request, $id);
     }
 
     public function confirmation(Request $request)
-    {   
+    {
         return $this->EPaycoPaymentQuery->confirmation($request);
     }
-   
 }

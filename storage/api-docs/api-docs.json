@@ -468,14 +468,14 @@
                 }
             }
         },
-        "/epaycopayment/storetransaction/{id}": {
+        "/epaycopayment/store/{id}": {
             "post": {
                 "tags": [
                     "EPaycoPayment"
                 ],
                 "summary": "Create a Transaction",
                 "description": "Return a Transaction",
-                "operationId": "storeTransaction",
+                "operationId": "store",
                 "parameters": [
                     {
                         "name": "id",
@@ -497,6 +497,38 @@
                         }
                     }
                 },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/epaycopayment/show/{id}": {
+            "get": {
+                "tags": [
+                    "EPaycoPayment"
+                ],
+                "summary": "Show a Transaction",
+                "description": "Return a Transaction",
+                "operationId": "show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Invoice Id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation"

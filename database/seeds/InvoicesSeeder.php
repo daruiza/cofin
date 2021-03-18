@@ -16,7 +16,7 @@ class InvoicesSeeder extends Seeder
 	{
         DB::table('invoices')->insert(array(
             'name' => 'ServicioHosting',
-            'number' => 'ABC321',
+            'number' => 'POI321',
             'description' => 'Descripción de Sercvicio',
             'dateStart' => Carbon::now(),
             'dateEnd' => Carbon::now()->addMonth(1),
@@ -25,12 +25,11 @@ class InvoicesSeeder extends Seeder
             'loopDay' => 1,	
             'invoices_status_id' => 2,
 			'customer_id' => 1
-        ));
-        
+        ));        
 
         DB::table('invoices')->insert(array(
             'name' => 'ServicioHosting',
-            'number' => 'ABC322',
+            'number' => 'POI54',
             'description' => 'Descripción de Sercvicio',
             'dateStart' => Carbon::now(),
             'dateEnd' => Carbon::now()->addMonth(1),

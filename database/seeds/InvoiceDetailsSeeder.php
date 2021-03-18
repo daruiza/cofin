@@ -15,7 +15,7 @@ class InvoiceDetailsSeeder extends Seeder
 	public function run()
 	{
         DB::table('invoices_detail')->insert(array(
-            'price' => 7500,
+            'price' => 3500,
             'volume' => 1,
             'description' => 'Descripción de Detalle',
             'invoice_id' => 1
