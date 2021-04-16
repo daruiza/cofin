@@ -54,7 +54,7 @@ use Illuminate\Routing\Controller as BaseController;
  * 
  * @OA\SecuritySchemes(
  *     securityDefinition="bearer",
- *      type="apiKey",
+ *     type="apiKey",
  *     in="header",
  *     name="Authorization"
  * )
