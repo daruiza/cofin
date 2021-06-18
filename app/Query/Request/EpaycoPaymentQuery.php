@@ -33,9 +33,7 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
                 'Accept' => 'application/json'
             ])->get(
                 env('APP_EPAYCO_URL_BANKS', 'https://secure.payco.co/restpagos/pse/bancos.json'),
-                [
-                    'public_key'  => $commerce->EPapiKey,
-                ]
+                ['public_key'  => $commerce->EPapiKey,]
             );
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 400);
@@ -126,14 +124,21 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
         return response()->json($request, 201);
     }
 
-    public function show(Request $request, int $id)
+    public function show(Request $request, int  $commerceId, int $invoiceId)
     {
-        if (!$id) {
+        if (!$commerceId) {
             return response()->json(['message' => 'Invoice not exist!'], 400);
         }
         try {
-            
-        }catch (\Exception $e) {
+            $commerce = Commerce::findOrFail($commerceId);
+            $response = Http::withHeaders([
+                'Accept' => 'application/json'
+            ])->get(
+                env('APP_EPAYCO_URL_BANKS', 'https://secure.payco.co/restpagos/pse/bancos.json'),
+                ['public_key'  => $commerce->EPapiKey,]
+            );
+            return response()->json($request, 201);
+        } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 400);
         }
     }

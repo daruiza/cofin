@@ -520,12 +520,21 @@
                 "operationId": "show",
                 "parameters": [
                     {
-                        "name": "id",
+                        "name": "invoiceId",
                         "in": "path",
                         "description": "Invoice Id",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "commerceId",
+                        "in": "path",
+                        "description": "Commerce Id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
                         }
                     }
                 ],

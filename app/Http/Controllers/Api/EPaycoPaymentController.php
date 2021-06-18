@@ -131,18 +131,27 @@ class EPaycoPaymentController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/epaycopayment/show/{id}",
+     *      path="/epaycopayment/show/{commerceId}/{invoiceId}",
      *      operationId="show",
      *      tags={"EPaycoPayment"},
      *      summary="Show a Transaction",
      *      description="Return a Transaction",
      *      @OA\Parameter(
-     *          name="id",
+     *          name="invoiceId",
      *          description="Invoice Id",
      *          required=true,
      *          in="path",
      *          @OA\Schema(
-     *              type="string"
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Parameter(
+     *          name="commerceId",
+     *          description="Commerce Id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
      *          )
      *      ),
      *      @OA\Response(
@@ -157,11 +166,11 @@ class EPaycoPaymentController extends Controller
      *          response=403,
      *          description="Forbidden"
      *      )
-     *     )
+     *   )
      */
-    public function show(Request $request, $id)
+    public function show(Request $request, $commerceId, $invoiceId)
     {
-        return $this->EPaycoPaymentQuery->show($request, $id);
+        return $this->EPaycoPaymentQuery->show($request, $commerceId, $invoiceId);
     }
 
     public function confirmation(Request $request)
