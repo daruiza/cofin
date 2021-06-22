@@ -510,7 +510,7 @@
                 }
             }
         },
-        "/epaycopayment/show/{id}": {
+        "/epaycopayment/show/{commerceId}/{invoiceId}": {
             "get": {
                 "tags": [
                     "EPaycoPayment"
@@ -520,18 +520,18 @@
                 "operationId": "show",
                 "parameters": [
                     {
-                        "name": "invoiceId",
+                        "name": "commerceId",
                         "in": "path",
-                        "description": "Invoice Id",
+                        "description": "Commerce Id",
                         "required": true,
                         "schema": {
                             "type": "integer"
                         }
                     },
                     {
-                        "name": "commerceId",
+                        "name": "invoiceId",
                         "in": "path",
-                        "description": "Commerce Id",
+                        "description": "Invoice Id",
                         "required": true,
                         "schema": {
                             "type": "integer"

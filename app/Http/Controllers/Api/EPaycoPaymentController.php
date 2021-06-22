@@ -135,19 +135,19 @@ class EPaycoPaymentController extends Controller
      *      operationId="show",
      *      tags={"EPaycoPayment"},
      *      summary="Show a Transaction",
-     *      description="Return a Transaction",
+     *      description="Return a Transaction",     
      *      @OA\Parameter(
-     *          name="invoiceId",
-     *          description="Invoice Id",
+     *          name="commerceId",
+     *          description="Commerce Id",
      *          required=true,
      *          in="path",
      *          @OA\Schema(
      *              type="integer"
      *          )
      *      ),
-     *      @OA\Parameter(
-     *          name="commerceId",
-     *          description="Commerce Id",
+     * *      @OA\Parameter(
+     *          name="invoiceId",
+     *          description="Invoice Id",
      *          required=true,
      *          in="path",
      *          @OA\Schema(

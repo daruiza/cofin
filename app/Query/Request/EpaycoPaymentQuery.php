@@ -29,18 +29,17 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
         }
         try {
             $commerce = Commerce::findOrFail($id);
-            $response = Http::withHeaders([
-                'Accept' => 'application/json'
-            ])->get(
-                env('APP_EPAYCO_URL_BANKS', 'https://secure.payco.co/restpagos/pse/bancos.json'),
-                ['public_key'  => $commerce->EPapiKey,]
-            );
+            $epayco = new Epayco([
+                'apiKey' => $commerce->EPapiKey,
+                'privateKey' => $commerce->EPprivateKey,
+                'test' => false,
+                'lenguage' => 'php'
+            ]);
+            $response = $epayco->bank->pseBank();
+            return response()->json($response, 201);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 400);
         }
-
-
-        return response()->json($response->json(), $response->status());
     }
 
     public function store(Request $request, $id)
@@ -76,7 +75,7 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
                 "country" => env('APP_EPAYCO_COUNTRY'),
                 "url_response" => env('API_URL') . 'home/' . $request->input('url_response') . '/' . $request->input('invoice'),
                 "url_confirmation" => env('APP_URL') . 'api/epaycopayment/' . env('APP_EPAYCO_URL_CONFIRMATION'),
-                "method_confirmation" => env('APP_EPAYCO_METHOD_CONFIRMATION')
+                "method_confirmation" => env('APP_EPAYCO_METHOD_CONFIRMATION', 'POST')
             );
 
             Log::info('*-*-* storeTransaction Start*-*-*');
@@ -131,13 +130,16 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
         }
         try {
             $commerce = Commerce::findOrFail($commerceId);
-            $response = Http::withHeaders([
-                'Accept' => 'application/json'
-            ])->get(
-                env('APP_EPAYCO_URL_BANKS', 'https://secure.payco.co/restpagos/pse/bancos.json'),
-                ['public_key'  => $commerce->EPapiKey,]
-            );
-            return response()->json($request, 201);
+
+            $epayco = new Epayco([
+                'apiKey' => $commerce->EPapiKey,
+                'privateKey' => $commerce->EPprivateKey,
+                'test' => false,
+                'lenguage' => 'php'
+            ]);
+
+            $response = $epayco->bank->get($invoiceId);
+            return response()->json($response, 201);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 400);
         }
