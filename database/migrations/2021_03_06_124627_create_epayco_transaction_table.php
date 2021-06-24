@@ -34,6 +34,10 @@ class CreateEpaycoTransactionTable extends Migration
             $table->string('urlbanco');
             $table->string('transactionID');
             $table->string('ticketId');
+            $table->integer('commerce_id')->unsigned()->default(1);
+            $table->foreign('commerce_id')->references('id')->on('commerces')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->timestamps();
         });
     }

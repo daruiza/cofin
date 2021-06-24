@@ -105,6 +105,7 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
                 $epaycoTransaction->urlbanco = $pse->data->urlbanco;
                 $epaycoTransaction->transactionID = $pse->data->transactionID;
                 $epaycoTransaction->ticketId = $pse->data->ticketId;
+                $epaycoTransaction->commerce_id = $commerce->id;
                 $epaycoTransaction->save();
             }
         } catch (\Exception $e) {
@@ -116,10 +117,18 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
         return response()->json($pse, 201);
     }
 
-    public function confirmation(Request $request)
+    public function confirmationPost(Request $request)
     {
-        Log::info('Request Confirmation Epayco');
+        Log::info('Request Confirmation Epayco POST');
         Log::info(json_encode($request->input()));
+        return response()->json($request, 201);
+    }
+
+    public function confirmationGet(Request $request, array $requestGet)
+    {
+        Log::info('Request Confirmation Epayco GET');
+        Log::info(json_encode($request->input()));
+        Log::info(json_encode($requestGet));
         return response()->json($request, 201);
     }
 
