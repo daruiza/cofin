@@ -13,5 +13,5 @@ interface IEpaycoPaymentQuery
     public function show(Request $request, int  $commerceId, int $invoiceId);
     public function update(Request $request, int $id);
     public function destroy(Int $id);
-    public function confirmationGet(Request $request, array $requestGet);
+    public function confirmationGet(Request $request);
 }

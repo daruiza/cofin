@@ -124,12 +124,11 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
         return response()->json($request, 201);
     }
 
-    public function confirmationGet(Request $request, array $requestGet)
+    public function confirmationGet(Request $request)
     {
         Log::info('Request Confirmation Epayco GET');
         Log::info(json_encode($request->input()));
-        Log::info(json_encode($requestGet));
-        return response()->json($request, 201);
+        return response()->json($request->input(), 201);
     }
 
     public function show(Request $request, int  $commerceId, int $invoiceId)
