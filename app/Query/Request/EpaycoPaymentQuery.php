@@ -109,6 +109,8 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
                 $epaycoTransaction->save();
             }
         } catch (\Exception $e) {
+            Log::info('*-*-* storeTransaction Error *-*-*');
+            Log::error($e->getMessage());
             return response()->json(['message' => $e->getMessage()], 400);
         }
 
