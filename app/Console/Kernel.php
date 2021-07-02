@@ -4,6 +4,9 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\Log;
+
+use App\Jobs\InvoiceVerification;
 
 class Kernel extends ConsoleKernel
 {
@@ -25,9 +28,12 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
-        $schedule->call(function () {
             
-        })->daily();
+        $schedule->job(new InvoiceVerification)->everyMinute();
+
+        $schedule->call(function () {
+            Log::info("message: scheduleCall");
+        })->everyMinute();
     }
 
     /**
