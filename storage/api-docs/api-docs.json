@@ -704,7 +704,7 @@
                 ],
                 "summary": "GetOut",
                 "description": "Close session",
-                "operationId": "App\\Http\\Controllers\\Auth\\AuthController::logout",
+                "operationId": "c72b623993d113c4537ae7f79d8a00a1",
                 "responses": {
                     "200": {
                         "description": "Successful operation"

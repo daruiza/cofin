@@ -133,7 +133,7 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
         return response()->json($request->input(), 201);
     }
 
-    public function show(Request $request, int  $commerceId, int $invoiceId)
+    public function show(Request $request, int  $commerceId, int $transactionId)
     {
         if (!$commerceId) {
             return response()->json(['message' => 'Invoice not exist!'], 400);
@@ -148,8 +148,21 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
                 'lenguage' => 'php'
             ]);
 
-            $response = $epayco->bank->get($invoiceId);
+            $response = $epayco->bank->get($transactionId);
             return response()->json($response, 201);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 400);
+        }
+    }
+
+    public function showByInvoiceId(Request $request, int  $commerceId, int $invoiceId)
+    {
+        if (!$commerceId) {
+            return response()->json(['message' => 'Invoice not exist!'], 400);
+        }
+        try {
+            $commerce = Commerce::findOrFail($commerceId);           
+            return response()->json($commerce, 201);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 400);
         }

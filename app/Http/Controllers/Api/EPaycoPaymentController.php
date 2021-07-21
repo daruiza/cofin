@@ -131,7 +131,7 @@ class EPaycoPaymentController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/epaycopayment/show/{commerceId}/{invoiceId}",
+     *      path="/epaycopayment/show/{commerceId}/{transactionId}",
      *      operationId="show",
      *      tags={"EPaycoPayment"},
      *      summary="Show a Transaction",
@@ -146,8 +146,8 @@ class EPaycoPaymentController extends Controller
      *          )
      *      ),
      * *      @OA\Parameter(
-     *          name="invoiceId",
-     *          description="Invoice Id",
+     *          name="transactionId",
+     *          description="transaction Id",
      *          required=true,
      *          in="path",
      *          @OA\Schema(
@@ -168,10 +168,56 @@ class EPaycoPaymentController extends Controller
      *      )
      *   )
      */
-    public function show(Request $request, int $commerceId, int $invoiceId)
+    public function show(Request $request, int $commerceId, int $transactionId)
     {
-        return $this->EPaycoPaymentQuery->show($request, $commerceId, $invoiceId);
+        return $this->EPaycoPaymentQuery->show($request, $commerceId, $transactionId);
     }
+
+    /**
+     * @OA\Get(
+     *      path="/epaycopayment/showByInvoiceId/{commerceId}/{invoiceId}",
+     *      operationId="show",
+     *      tags={"EPaycoPayment"},
+     *      summary="Show a Transaction",
+     *      description="Return a Transaction",     
+     *      @OA\Parameter(
+     *          name="commerceId",
+     *          description="Commerce Id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     * *      @OA\Parameter(
+     *          name="invoiceId",
+     *          description="Invoice Id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *   )
+     */
+    public function showByInvoiceId(Request $request, int $commerceId, string $invoiceId)
+    {
+        return $this->EPaycoPaymentQuery->showByInvoiceId($request, $commerceId, $invoiceId);
+    }
+
+    
 
     public function confirmationPost(Request $request)
     {
