@@ -71,8 +71,8 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
                 "description" => '',
                 "tax" => env('APP_EPAYCO_TAX'),
                 "tax_base" => env('APP_EPAYCO_TAX_BASE'),
-                "currency" => env('APP_EPAYCO_CURRENCY'),
-                "country" => env('APP_EPAYCO_COUNTRY'),
+                "currency" => $commerce->currency ? $commerce->currency : env('APP_EPAYCO_CURRENCY', 'COP'),
+                "country" => $commerce->country ? $commerce->country : env('APP_EPAYCO_COUNTRY', 'CO'),
                 "url_response" => env('API_URL') . 'home/' . $request->input('url_response') . '/' . $request->input('invoice'),
                 "url_confirmation" => env('APP_URL') . 'api/epaycopayment/' . env('APP_EPAYCO_URL_CONFIRMATION'),
                 "method_confirmation" => env('APP_EPAYCO_METHOD_CONFIRMATION', 'POST')
@@ -80,8 +80,9 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
 
             Log::info('*-*-* storeTransaction Start*-*-*');
             Log::info(json_encode($data));
-
+            
             $pse = $epayco->bank->create($data);
+            Log::info('*-*-* $epayco->bank->create Start*-*-*');
             Log::info(json_encode($pse));
 
             if ($pse->success) {

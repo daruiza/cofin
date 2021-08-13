@@ -19,6 +19,7 @@ class Commerce extends Model
         'description',
         'logo',
         'currency',
+        'country',
         'label',
         'apiLogin',
         'apiKey',
