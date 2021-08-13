@@ -28,6 +28,10 @@ class EpaycoTransaction extends Model
         'urlbanco',
         'transactionID',
         'ticketId',
+        'email',
+        'cell_phone',
+        'customer_id',
+        'commerce_id',
     ];
 
     public function scopeFactura($query, $factura)

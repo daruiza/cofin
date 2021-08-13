@@ -510,7 +510,48 @@
                 }
             }
         },
-        "/epaycopayment/show/{commerceId}/{invoiceId}": {
+        "/epaycopayment/show/{commerceId}/{transactionId}": {
+            "get": {
+                "tags": [
+                    "EPaycoPayment"
+                ],
+                "summary": "Show a Transaction",
+                "description": "Return a Transaction",
+                "operationId": "show",
+                "parameters": [
+                    {
+                        "name": "commerceId",
+                        "in": "path",
+                        "description": "Commerce Id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "transactionId",
+                        "in": "path",
+                        "description": "transaction Id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/epaycopayment/showByInvoiceId/{commerceId}/{invoiceId}": {
             "get": {
                 "tags": [
                     "EPaycoPayment"
@@ -534,7 +575,7 @@
                         "description": "Invoice Id",
                         "required": true,
                         "schema": {
-                            "type": "integer"
+                            "type": "string"
                         }
                     }
                 ],

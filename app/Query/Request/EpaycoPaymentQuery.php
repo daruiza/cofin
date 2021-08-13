@@ -80,7 +80,7 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
 
             Log::info('*-*-* storeTransaction Start*-*-*');
             Log::info(json_encode($data));
-            
+
             $pse = $epayco->bank->create($data);
             Log::info('*-*-* $epayco->bank->create Start*-*-*');
             Log::info(json_encode($pse));
@@ -107,6 +107,9 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
                 $epaycoTransaction->transactionID = $pse->data->transactionID;
                 $epaycoTransaction->ticketId = $pse->data->ticketId;
                 $epaycoTransaction->commerce_id = $commerce->id;
+                $epaycoTransaction->customer_id = $pse->data->doc_number;
+                $epaycoTransaction->email = $pse->data->email;
+                $epaycoTransaction->cell_phone = $pse->data->cell_phone;
                 $epaycoTransaction->save();
             }
         } catch (\Exception $e) {
@@ -162,7 +165,7 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
             return response()->json(['message' => 'Invoice not exist!'], 400);
         }
         try {
-            $commerce = Commerce::findOrFail($commerceId);           
+            $commerce = Commerce::findOrFail($commerceId);
             return response()->json($commerce, 201);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 400);
