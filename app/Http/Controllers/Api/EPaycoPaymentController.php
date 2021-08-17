@@ -176,7 +176,7 @@ class EPaycoPaymentController extends Controller
     /**
      * @OA\Get(
      *      path="/epaycopayment/showByInvoiceId/{commerceId}/{invoiceId}",
-     *      operationId="show",
+     *      operationId="showByInvoiceId",
      *      tags={"EPaycoPayment"},
      *      summary="Show a Transaction",
      *      description="Return a Transaction",     
@@ -219,8 +219,8 @@ class EPaycoPaymentController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/epaycopayment/showByCustomerIdentification/{commerceId}/{customerIdentification}",
-     *      operationId="show",
+     *      path="/epaycopayment/showByCustomerIdentification/{commerceId}",
+     *      operationId="showByCustomerIdentification",
      *      tags={"EPaycoPayment"},
      *      summary="Show a Transaction",
      *      description="Return a Transaction",     
@@ -236,8 +236,8 @@ class EPaycoPaymentController extends Controller
      * *      @OA\Parameter(
      *          name="CustomerIdentification",
      *          description="Customer Identification",
-     *          required=true,
-     *          in="path",
+     *          required=false,
+     *          in="query",
      *          @OA\Schema(
      *              type="integer"
      *          )
@@ -256,9 +256,9 @@ class EPaycoPaymentController extends Controller
      *      )
      *   )
      */
-    public function showByCustomerIdentification(Request $request, int $commerceId, string $customerIdentification)
+    public function showByCustomerIdentification(Request $request, int $commerceId)
     {
-        return $this->EPaycoPaymentQuery->customerIdentification($request, $commerceId, $customerIdentification);
+        return $this->EPaycoPaymentQuery->customerIdentification($request, $commerceId);
     }
 
     

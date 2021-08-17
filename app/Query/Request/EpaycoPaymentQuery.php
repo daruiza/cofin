@@ -166,7 +166,7 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
         }
         try {
             $commerce = Commerce::findOrFail($commerceId);
-            
+
             $epayco = new Epayco([
                 'apiKey' => $commerce->EPapiKey,
                 'privateKey' => $commerce->EPprivateKey,
@@ -178,31 +178,22 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
             return response()->json($commerce, 201);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 400);
-        }        
+        }
     }
 
-    public function customerIdentification(Request $request, int  $commerceId, int $customerIdentification)
+    public function customerIdentification(Request $request, int  $commerceId)
     {
         if (!$commerceId) {
             return response()->json(['message' => 'Invoice not exist!'], 400);
         }
         try {
             $commerce = Commerce::findOrFail($commerceId);
-            
-            $epayco = new Epayco([
-                'apiKey' => $commerce->EPapiKey,
-                'privateKey' => $commerce->EPprivateKey,
-                'test' => false,
-                'lenguage' => 'php'
-            ]);
+            $response = in_array('CustomerIdentification', $request->input()) ? EpaycoTransaction::CustomerId()->get() : [];
 
-            //$response = $transactionId ? $epayco->bank->get($transactionId) : $request->input();
-            return response()->json($commerce, 201);
+            return response()->json($response, 201);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 400);
         }
-
-        
     }
 
 

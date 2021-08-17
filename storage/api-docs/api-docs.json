@@ -558,7 +558,7 @@
                 ],
                 "summary": "Show a Transaction",
                 "description": "Return a Transaction",
-                "operationId": "show",
+                "operationId": "showByInvoiceId",
                 "parameters": [
                     {
                         "name": "commerceId",
@@ -592,14 +592,14 @@
                 }
             }
         },
-        "/epaycopayment/showByCustomerIdentification/{commerceId}/{customerIdentification}": {
+        "/epaycopayment/showByCustomerIdentification/{commerceId}": {
             "get": {
                 "tags": [
                     "EPaycoPayment"
                 ],
                 "summary": "Show a Transaction",
                 "description": "Return a Transaction",
-                "operationId": "show",
+                "operationId": "showByCustomerIdentification",
                 "parameters": [
                     {
                         "name": "commerceId",
@@ -612,9 +612,9 @@
                     },
                     {
                         "name": "CustomerIdentification",
-                        "in": "path",
+                        "in": "query",
                         "description": "Customer Identification",
-                        "required": true,
+                        "required": false,
                         "schema": {
                             "type": "integer"
                         }

@@ -40,4 +40,11 @@ class EpaycoTransaction extends Model
             return $query->where('factura', 'LIKE', "$factura");
         }
     }
+
+    public function scopeCustomerId($query, $customer_id)
+    {
+        return $customer_id ? $query->where('customer_id', 'LIKE', "$customer_id") : $query;        
+    }
+
+
 }
