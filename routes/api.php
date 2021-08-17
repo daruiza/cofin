@@ -66,6 +66,7 @@ Route::group(['prefix' => 'epaycopayment'], function () {
     Route::post('store/{id}', 'Api\EPaycoPaymentController@store');
     Route::get('show/{commerceId}/{transactionId}', 'Api\EPaycoPaymentController@show');   
     Route::get('showByInvoiceId/{commerceId}/{invoiceId}', 'Api\EPaycoPaymentController@showByInvoiceId');   
+    Route::get('showByCustomerId/{commerceId}/{customerIdentification}', 'Api\EPaycoPaymentController@showByCustomerIdentification');   
 
     Route::post('epayco-pse-bank-confirmation', 'Api\EPaycoPaymentController@confirmationPost');
     Route::get('epayco-pse-bank-confirmation', 'Api\EPaycoPaymentController@confirmationGet');
