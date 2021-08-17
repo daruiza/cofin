@@ -219,7 +219,7 @@ class EPaycoPaymentController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/epaycopayment/showByCustomerId/{commerceId}/{customerId}",
+     *      path="/epaycopayment/showByCustomerIdentification/{commerceId}/{customerIdentification}",
      *      operationId="show",
      *      tags={"EPaycoPayment"},
      *      summary="Show a Transaction",

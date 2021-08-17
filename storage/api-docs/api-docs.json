@@ -592,7 +592,7 @@
                 }
             }
         },
-        "/epaycopayment/showByCustomerId/{commerceId}/{customerId}": {
+        "/epaycopayment/showByCustomerIdentification/{commerceId}/{customerIdentification}": {
             "get": {
                 "tags": [
                     "EPaycoPayment"
