@@ -107,9 +107,9 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
                 $epaycoTransaction->transactionID = $pse->data->transactionID;
                 $epaycoTransaction->ticketId = $pse->data->ticketId;
                 $epaycoTransaction->commerce_id = $commerce->id;
-                $epaycoTransaction->customer_id = $pse->data->doc_number;
-                $epaycoTransaction->email = $pse->data->email;
-                $epaycoTransaction->cell_phone = $pse->data->cell_phone;
+                $epaycoTransaction->customer_id = $data['doc_number'];
+                $epaycoTransaction->email = $data['email'];
+                $epaycoTransaction->cell_phone = $data['cell_phone'];
                 $epaycoTransaction->save();
             }
         } catch (\Exception $e) {
