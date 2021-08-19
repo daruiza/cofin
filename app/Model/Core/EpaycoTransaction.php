@@ -3,9 +3,11 @@
 namespace App\Model\Core;
 
 use Illuminate\Database\Eloquent\Model;
+use Mockery\Undefined;
 
 class EpaycoTransaction extends Model
 {
+    protected $table = 'epayco_transactions';
     protected $fillable =
     [
         'id',
@@ -43,7 +45,12 @@ class EpaycoTransaction extends Model
 
     public function scopeCustomerId($query, $customer_id)
     {
-        return $customer_id ? $query->where('customer_id', 'LIKE', "$customer_id") : $query;        
+        return $customer_id ? $query->where('customer_id', 'LIKE', $customer_id) : $query;        
+    }
+
+    public function scopeSuccess($query, $success)
+    {
+        return is_null($success) ?  $query : $query->where('success', $success);        
     }
 
 

@@ -188,8 +188,16 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
         }
         try {
             $commerce = Commerce::findOrFail($commerceId);
-            $response = in_array('CustomerIdentification', $request->input()) ? EpaycoTransaction::CustomerId()->get() : [];
 
+            $response =
+                $request->input('CustomerIdentification') ?
+                EpaycoTransaction::CustomerId($request->input('CustomerIdentification'))->Success(true)->get() :
+                [];
+
+            if (count($response)) {
+                // Vamos a averiguar el estado de las transacciones en EpayCo
+                $response = count($response);
+            }
             return response()->json($response, 201);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 400);
