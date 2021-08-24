@@ -48,6 +48,11 @@ class EpaycoTransaction extends Model
         return $customer_id ? $query->where('customer_id', 'LIKE', $customer_id) : $query;        
     }
 
+    public function scopeTicketId($query, $ticketId)
+    {
+        return is_null($ticketId) ?  $query : $query->where('ticketId', $ticketId);        
+    }
+
     public function scopeSuccess($query, $success)
     {
         return is_null($success) ?  $query : $query->where('success', $success);        

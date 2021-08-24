@@ -261,6 +261,50 @@ class EPaycoPaymentController extends Controller
         return $this->EPaycoPaymentQuery->customerIdentification($request, $commerceId);
     }
 
+    /**
+     * @OA\Get(
+     *      path="/epaycopayment/update/{commerceId}",
+     *      operationId="update",
+     *      tags={"EPaycoPayment"},
+     *      summary="Update a Transaction",
+     *      description="Return a Transaction After Update",     
+     *      @OA\Parameter(
+     *          name="commerceId",
+     *          description="Commerce Id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     * *      @OA\Parameter(
+     *          name="CustomerIdentification",
+     *          description="Customer Identification",
+     *          required=false,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *   )
+     */
+    public function update(Request $request, int $commerceId)
+    {
+        return $this->EPaycoPaymentQuery->update($request, $commerceId);
+    }
+
     
 
     public function confirmationPost(Request $request)

@@ -187,8 +187,6 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
             return response()->json(['message' => 'Invoice not exist!'], 400);
         }
         try {
-            $commerce = Commerce::findOrFail($commerceId);
-
             $response =
                 $request->input('CustomerIdentification') ?
                 EpaycoTransaction::CustomerId($request->input('CustomerIdentification'))->Success(true)->first() :
@@ -199,11 +197,46 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
         }
     }
 
-
-
-    public function update(Request $request, int $id)
+    // Recibe una transacción y actualiza su estado
+    public function update(Request $request, int $commerceId)
     {
-        return response()->json(['message' => 'EPayco Update!'], 201);
+
+        if (!$commerceId) {
+            return response()->json(['message' => 'Invoice not exist!'], 400);
+        }
+        try {
+            $transaction = $this->customerIdentification($request, $commerceId)->original;
+            if ($transaction->ticketId) {
+                $pse = $this->show($request, $commerceId, $transaction->ticketId)->original;
+                $epaycoTransaction = EpaycoTransaction::TicketId($transaction->ticketId)->first();
+                $epaycoTransaction->success = $pse->success;
+                $epaycoTransaction->title_response = $pse->title_response;
+                $epaycoTransaction->text_response = $pse->text_response;
+                $epaycoTransaction->last_action = $pse->last_action;
+                $epaycoTransaction->ref_payco = $pse->data->ref_payco;
+                $epaycoTransaction->factura = $pse->data->factura;
+                $epaycoTransaction->descripcion = $pse->data->descripcion;
+                $epaycoTransaction->valor = $pse->data->valor;
+                $epaycoTransaction->iva = $pse->data->iva;
+                $epaycoTransaction->baseiva = $pse->data->baseiva;
+                $epaycoTransaction->moneda = $pse->data->moneda;
+                $epaycoTransaction->estado = $pse->data->estado;
+                $epaycoTransaction->respuesta = $pse->data->respuesta;
+                $epaycoTransaction->autorizacion = $pse->data->autorizacion;
+                $epaycoTransaction->recibo = $pse->data->recibo;
+                $epaycoTransaction->transactionID = $pse->data->transactionID;
+                $epaycoTransaction->ticketId = $pse->data->ticketId;
+                $epaycoTransaction->save();
+
+                // Actualizamos las facturas involucradas
+
+                
+                return response()->json($epaycoTransaction, 201);
+            }
+            return response()->json(null, 404);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 400);
+        }
     }
     public function destroy(Int $id)
     {
