@@ -7,13 +7,13 @@ use Illuminate\Http\Request;
 use App\Query\Abstraction\IEpaycoPaymentQuery;
 
 use App\Model\Core\Commerce;
+use App\Model\Core\Invoice;
 use Epayco\Epayco;
 use Epayco\Utils\PaycoAes;
 use App\Model\Core\EpaycoTransaction;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
-
 
 class EpaycoPaymentQuery implements IEpaycoPaymentQuery
 {
@@ -44,8 +44,8 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
 
     public function store(Request $request, $id)
     {
-        if (!$id) {
-            return response()->json(['message' => 'Commerce exist!'], 400);
+        if (!$id || !$request->input('invoice')) {
+            return response()->json(['message' => 'Commerce exist! oR Invoice not exist'], 400);
         }
         try {
             $commerce = Commerce::findOrFail($id);
@@ -117,9 +117,16 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
             Log::error($e->getMessage());
             return response()->json(['message' => $e->getMessage()], 400);
         }
-
+        
+        // Actualizamos el ticketId de Las Facturas Invoice
+        // Recorre todos los numero de las facturas relacionadas
+        foreach (explode('-', $request->input('invoice')) as $invoice) {
+            if ($invoice) {
+                $this->updateInvoice($invoice, $pse->data->ticketId);
+            }
+        }
+        
         Log::info('*-*-* storeTransaction End *-*-*');
-
         return response()->json($pse, 201);
     }
 
@@ -207,7 +214,9 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
         try {
             $transaction = $this->customerIdentification($request, $commerceId)->original;
             if ($transaction->ticketId) {
+                //al back de epayco
                 $pse = $this->show($request, $commerceId, $transaction->ticketId)->original;
+                // al base de datos
                 $epaycoTransaction = EpaycoTransaction::TicketId($transaction->ticketId)->first();
                 $epaycoTransaction->success = $pse->success;
                 $epaycoTransaction->title_response = $pse->title_response;
@@ -226,11 +235,13 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
                 $epaycoTransaction->recibo = $pse->data->recibo;
                 $epaycoTransaction->transactionID = $pse->data->transactionID;
                 $epaycoTransaction->ticketId = $pse->data->ticketId;
+
+                // Siempre actualiza asi sea la misma información
                 $epaycoTransaction->save();
 
-                // Actualizamos las facturas involucradas
+                // Actualizamos las facturas involucradas, dus estados
 
-                
+
                 return response()->json($epaycoTransaction, 201);
             }
             return response()->json(null, 404);
@@ -254,5 +265,19 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
             'apiLogin' => $commerce->apiLogin,
             'apiKey' =>  $commerce->apiKey
         ];
+    }
+
+    public function updateInvoice(String $number, int $ticketId)
+    {
+        try {
+            if (!$number || !$ticketId) {
+                return response()->json(['message' => 'Invoice not exist!'], 400);
+            }
+            $invoice = Invoice::Number($number)->first();
+            $invoice->ticketId = $ticketId;
+            $invoice->save();
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 400);
+        }
     }
 }

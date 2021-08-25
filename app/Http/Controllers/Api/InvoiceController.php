@@ -99,4 +99,9 @@ class InvoiceController extends Controller
     {
         return $this->InvoiceQuery->store($request);
     }
+
+    public function update(Request $request, int $id)
+    {
+        return $this->InvoiceQuery->update($request, $id);
+    }
 }

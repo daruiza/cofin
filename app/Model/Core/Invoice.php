@@ -11,6 +11,7 @@ class Invoice extends Model
     protected $fillable = 
     [
         'id',
+        'ticketId',
         'name',
         'number',
         'description',
@@ -27,5 +28,10 @@ class Invoice extends Model
     public function customer()
     {
         return $this->belongsTo(Customer::class);
+    }
+
+    public function scopeNumber($query, $number)
+    {
+        return is_null($number) ?  $query : $query->where('number', 'LIKE', $number);        
     }
 }
