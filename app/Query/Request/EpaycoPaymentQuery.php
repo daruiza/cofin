@@ -111,21 +111,23 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
                 $epaycoTransaction->email = $data['email'];
                 $epaycoTransaction->cell_phone = $data['cell_phone'];
                 $epaycoTransaction->save();
+
+                // Actualizamos el ticketId de Las Facturas Invoice
+                // Recorre todos los numero de las facturas relacionadas
+                foreach (explode('-', $request->input('invoice')) as $invoice) {
+                    if ($invoice) {                        
+                        $this->updateInvoice($invoice, $pse->data->ticketId);
+                    }
+                }
             }
         } catch (\Exception $e) {
             Log::info('*-*-* storeTransaction Error *-*-*');
             Log::error($e->getMessage());
             return response()->json(['message' => $e->getMessage()], 400);
         }
-        
-        // Actualizamos el ticketId de Las Facturas Invoice
-        // Recorre todos los numero de las facturas relacionadas
-        foreach (explode('-', $request->input('invoice')) as $invoice) {
-            if ($invoice) {
-                $this->updateInvoice($invoice, $pse->data->ticketId);
-            }
-        }
-        
+
+
+
         Log::info('*-*-* storeTransaction End *-*-*');
         return response()->json($pse, 201);
     }
@@ -267,7 +269,7 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
         ];
     }
 
-    public function updateInvoice(String $number, int $ticketId)
+    public function updateInvoice(String $number, String $ticketId)
     {
         try {
             if (!$number || !$ticketId) {
