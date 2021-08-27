@@ -8,42 +8,74 @@ use Carbon\Carbon;
 class InvoicesStatusSeeder extends Seeder
 {
     /**
-	 * Run the database seeds.
-	 *
-	 * @return void
-	 */
-	public function run()
-	{
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
         DB::table('invoices_status')->insert(array(
-            'name' => 'create', 
+            'name' => 'Creada', 
             'description' => 'Factura Creada',
         ));
-        
+
         DB::table('invoices_status')->insert(array(
-            'name' => 'production', 
-            'description' => 'Factura en Prodicción',
+            'name' => 'Produccion', 
+            'description' => 'Factura en Producción',
         ));
-        
         DB::table('invoices_status')->insert(array(
-            'name' => 'cancel',
-            'description' => 'Factura Pagada',
+            'name' => 'Pendiente',
+            'description' => 'Factura Pendiente',
         ));
 
         DB::table('invoices_status')->insert(array(
-            'name' => 'consigned',
-            'description' => 'Factura Consignada',
+            'name' => 'Retenida',
+            'description' => 'Factura en Retenida',
         ));
 
         DB::table('invoices_status')->insert(array(
-            'name' => 'overdue',
-            'description' => 'Factura no pagada',
+            'name' => 'Iniciada',
+            'description' => 'Factura Iniciada',
         ));
-        
-        DB::table('invoices_status')->insert(array(
-            'name' => 'delete', 
-            'description' => 'Factura Borrada',
-		));
 
+        DB::table('invoices_status')->insert(array(
+            'name' => 'Aceptada',
+            'description' => 'Factura Aceptada',
+        ));
+
+        DB::table('invoices_status')->insert(array(
+            'name' => 'Rechazada',
+            'description' => 'Factura Rechazada',
+        ));
+
+        DB::table('invoices_status')->insert(array(
+            'name' => 'Fallida',
+            'description' => 'Factura Fallida',
+        ));
+
+        DB::table('invoices_status')->insert(array(
+            'name' => 'Reversada',
+            'description' => 'Factura Reversada',
+        ));
+
+        DB::table('invoices_status')->insert(array(
+            'name' => 'Expirada',
+            'description' => 'Factura Expirada',
+        ));
+
+        DB::table('invoices_status')->insert(array(
+            'name' => 'Abandonada',
+            'description' => 'Factura Abandonada',
+        ));
+
+        DB::table('invoices_status')->insert(array(
+            'name' => 'Cancelada',
+            'description' => 'Factura Cancelada',
+        ));
+
+        DB::table('invoices_status')->insert(array(
+            'name' => 'Antifraude',
+            'description' => 'Factura Antifraude',
+        ));
     }
-
 }

@@ -8,6 +8,7 @@ use App\Query\Abstraction\IEpaycoPaymentQuery;
 
 use App\Model\Core\Commerce;
 use App\Model\Core\Invoice;
+use App\Model\Core\InvoiceStatus;
 use Epayco\Epayco;
 use Epayco\Utils\PaycoAes;
 use App\Model\Core\EpaycoTransaction;
@@ -115,8 +116,8 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
                 // Actualizamos el ticketId de Las Facturas Invoice
                 // Recorre todos los numero de las facturas relacionadas
                 foreach (explode('-', $request->input('invoice')) as $invoice) {
-                    if ($invoice) {                        
-                        $this->updateInvoice($invoice, $pse->data->ticketId);
+                    if ($invoice) {
+                        $this->updateInvoice($invoice, $pse->data->ticketId, $pse->data->estado);
                     }
                 }
             }
@@ -198,7 +199,10 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
         try {
             $response =
                 $request->input('CustomerIdentification') ?
-                EpaycoTransaction::CustomerId($request->input('CustomerIdentification'))->Success(true)->first() :
+                EpaycoTransaction::CustomerId($request->input('CustomerIdentification'))
+                ->Success(true)
+                ->Estado('Pendiente')
+                ->first() :
                 null;
             return response()->json($response, 201);
         } catch (\Exception $e) {
@@ -209,7 +213,6 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
     // Recibe una transacción y actualiza su estado
     public function update(Request $request, int $commerceId)
     {
-
         if (!$commerceId) {
             return response()->json(['message' => 'Invoice not exist!'], 400);
         }
@@ -241,8 +244,12 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
                 // Siempre actualiza asi sea la misma información
                 $epaycoTransaction->save();
 
-                // Actualizamos las facturas involucradas, dus estados
-
+                // Actualizamos las facturas involucradas, sus estados
+                foreach (explode('-', $pse->data->factura) as $invoice) {
+                    if ($invoice) {
+                        $this->updateInvoice($invoice, $pse->data->ticketId, $pse->data->estado);
+                    }
+                }
 
                 return response()->json($epaycoTransaction, 201);
             }
@@ -269,7 +276,8 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
         ];
     }
 
-    public function updateInvoice(String $number, String $ticketId)
+    // actualiza la Factura relaciona, le asigna el ticketId
+    public function updateInvoice(String $number, String $ticketId, String $estado)
     {
         try {
             if (!$number || !$ticketId) {
@@ -277,6 +285,7 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
             }
             $invoice = Invoice::Number($number)->first();
             $invoice->ticketId = $ticketId;
+            $invoice->invoices_status_id = InvoiceStatus::Name($estado)->firts()->id;
             $invoice->save();
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 400);

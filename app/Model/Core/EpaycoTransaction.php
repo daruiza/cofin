@@ -58,5 +58,10 @@ class EpaycoTransaction extends Model
         return is_null($success) ?  $query : $query->where('success', $success);        
     }
 
+    public function scopeEstado($query, $estado)
+    {
+        return $estado ? $query->where('estado', 'LIKE', $estado) : $query;        
+    }
+
 
 }
