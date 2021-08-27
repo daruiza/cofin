@@ -96,7 +96,15 @@ class CustomerQuery implements ICustomerQuery
                 ->leftJoin('invoices_detail', 'invoices.id', '=', 'invoices_detail.invoice_id')
                 ->where('user_id', $user->id)
                 ->where('commerce_id', $customerObject->commerce_id)
-                ->where('invoices_status_id', $invoices_status_production)
+                ->where(function ($q) use($invoices_status_production) {
+                    $q->where('invoices_status_id', $invoices_status_production)
+                        ->orWhere('invoices_status_id', 1)                       
+                        ->orWhere('invoices_status_id', 3)                       
+                        ->orWhere('invoices_status_id', 4)                       
+                        ->orWhere('invoices_status_id', 5)                       
+                        ->orWhere('invoices_status_id', 7);                       
+                })                             
+                // ->where('invoices_status_id', $invoices_status_production)
                 ->orderBy('customers.id',  $sort)
                 ->groupBy(
                     $invoicesid,

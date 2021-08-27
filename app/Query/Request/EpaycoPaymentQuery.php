@@ -201,7 +201,7 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
                 $request->input('CustomerIdentification') ?
                 EpaycoTransaction::CustomerId($request->input('CustomerIdentification'))
                 ->Success(true)
-                ->Estado('Pendiente')
+                ->Estado($request->input('Estado'))
                 ->first() :
                 null;
             return response()->json($response, 201);
@@ -250,7 +250,6 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
                         $this->updateInvoice($invoice, $pse->data->ticketId, $pse->data->estado);
                     }
                 }
-
                 return response()->json($epaycoTransaction, 201);
             }
             return response()->json(null, 404);
@@ -285,7 +284,7 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
             }
             $invoice = Invoice::Number($number)->first();
             $invoice->ticketId = $ticketId;
-            $invoice->invoices_status_id = InvoiceStatus::Name($estado)->firts()->id;
+            $invoice->invoices_status_id = InvoiceStatus::Name($estado)->first()->id;
             $invoice->save();
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 400);

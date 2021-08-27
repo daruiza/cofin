@@ -60,7 +60,7 @@ class EpaycoTransaction extends Model
 
     public function scopeEstado($query, $estado)
     {
-        return $estado ? $query->where('estado', 'LIKE', $estado) : $query;        
+        return $estado ? $query->where('estado', 'LIKE', $estado) : $query->where('estado', 'LIKE', 'Pendiente');        
     }
 
 

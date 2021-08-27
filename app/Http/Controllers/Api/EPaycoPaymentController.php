@@ -277,13 +277,22 @@ class EPaycoPaymentController extends Controller
      *              type="integer"
      *          )
      *      ),
-     * *      @OA\Parameter(
+     *      @OA\Parameter(
      *          name="CustomerIdentification",
      *          description="Customer Identification",
-     *          required=false,
+     *          required=true,
      *          in="query",
      *          @OA\Schema(
      *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Parameter(
+     *          name="Estado",
+     *          description="Transaction State",
+     *          required=false,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
      *          )
      *      ),
      *      @OA\Response(

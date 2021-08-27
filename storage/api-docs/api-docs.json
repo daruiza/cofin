@@ -655,9 +655,18 @@
                         "name": "CustomerIdentification",
                         "in": "query",
                         "description": "Customer Identification",
-                        "required": false,
+                        "required": true,
                         "schema": {
                             "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "Estado",
+                        "in": "query",
+                        "description": "Transaction State",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
                         }
                     }
                 ],
