@@ -244,10 +244,14 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
                 // Siempre actualiza asi sea la misma información
                 $epaycoTransaction->save();
 
-                // Actualizamos las facturas involucradas, sus estados
+                // Actualizamos las facturas involucradas, sus estados                
                 foreach (explode('-', $pse->data->factura) as $invoice) {
                     if ($invoice) {
-                        $this->updateInvoice($invoice, $pse->data->ticketId, $pse->data->estado);
+                        $this->updateInvoice(
+                            $invoice,
+                            $pse->data->ticketId,
+                            $pse->data->estado
+                        );
                     }
                 }
                 return response()->json($epaycoTransaction, 201);

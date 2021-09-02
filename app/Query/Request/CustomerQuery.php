@@ -23,6 +23,9 @@ class CustomerQuery implements ICustomerQuery
         return response()->json(['message' => 'Customer show!'], 201);
     }
 
+    // Consulta las Facturas pendientes por pagar
+    // Pero tambien se actualiza el estado de las 
+    // transacciónes (pendientes) y las mismas facturas relacionadas
     public function showByCommerce(Request $request)
     {
         $userObject = new User();
