@@ -618,6 +618,15 @@
                         "schema": {
                             "type": "integer"
                         }
+                    },
+                    {
+                        "name": "Estado",
+                        "in": "query",
+                        "description": "Estado de la trasaccion en base",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {

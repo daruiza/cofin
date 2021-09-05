@@ -241,6 +241,15 @@ class EPaycoPaymentController extends Controller
      *          @OA\Schema(
      *              type="integer"
      *          )
+     *      ),     * 
+     *       @OA\Parameter(
+     *          name="Estado",
+     *          description="Estado de la trasaccion en base",
+     *          required=false,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
      *      ),
      *      @OA\Response(
      *          response=200,

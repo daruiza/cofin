@@ -11,6 +11,8 @@ use App\Model\Core\PersonType;
 use Illuminate\Http\Request;
 use App\Query\Abstraction\ICustomerQuery;
 
+use App\Query\Request\EpaycoPaymentQuery;
+
 class CustomerQuery implements ICustomerQuery
 {
     public function index()
@@ -28,6 +30,15 @@ class CustomerQuery implements ICustomerQuery
     // transacciónes (pendientes) y las mismas facturas relacionadas
     public function showByCommerce(Request $request)
     {
+
+        try {
+            $epaycoPaymentQuery = new EpaycoPaymentQuery();
+            $request->request->add(['CustomerIdentification' => $request->input('identification')]);
+            $epaycoPaymentQuery->update($request, $request->input('commerce_id'))->original;
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 400);
+        }
+
         $userObject = new User();
         $userObject->identification = $request->input('identification');
         $userObject->active = $request->input('active') ? $request->input('active') : 1;
@@ -99,14 +110,14 @@ class CustomerQuery implements ICustomerQuery
                 ->leftJoin('invoices_detail', 'invoices.id', '=', 'invoices_detail.invoice_id')
                 ->where('user_id', $user->id)
                 ->where('commerce_id', $customerObject->commerce_id)
-                ->where(function ($q) use($invoices_status_production) {
+                ->where(function ($q) use ($invoices_status_production) {
                     $q->where('invoices_status_id', $invoices_status_production)
-                        ->orWhere('invoices_status_id', 1)                       
-                        ->orWhere('invoices_status_id', 3)                       
-                        ->orWhere('invoices_status_id', 4)                       
-                        ->orWhere('invoices_status_id', 5)                       
-                        ->orWhere('invoices_status_id', 7);                       
-                })                             
+                        ->orWhere('invoices_status_id', 1)
+                        ->orWhere('invoices_status_id', 3)
+                        ->orWhere('invoices_status_id', 4)
+                        ->orWhere('invoices_status_id', 5)
+                        ->orWhere('invoices_status_id', 7);
+                })
                 // ->where('invoices_status_id', $invoices_status_production)
                 ->orderBy('customers.id',  $sort)
                 ->groupBy(
@@ -142,7 +153,7 @@ class CustomerQuery implements ICustomerQuery
     {
         $personType =  PersonType::all();
         return response()->json($personType, 201);
-    }    
+    }
 
     public function store(Request $request)
     {
