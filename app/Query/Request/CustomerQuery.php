@@ -30,7 +30,6 @@ class CustomerQuery implements ICustomerQuery
     // transacciónes (pendientes) y las mismas facturas relacionadas
     public function showByCommerce(Request $request)
     {
-
         try {
             $epaycoPaymentQuery = new EpaycoPaymentQuery();
             $request->request->add(['CustomerIdentification' => $request->input('identification')]);

@@ -191,6 +191,7 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
         }
     }
 
+    // Busca y retorna la primera ocurrencia Transacción en base de datos
     public function customerIdentification(Request $request, int  $commerceId)
     {
         if (!$commerceId) {
@@ -210,7 +211,7 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
         }
     }
 
-    // Recibe una transacción y actualiza su estado
+    // Recibe un cliente y su tienda y actualiza el estado de la primer transacción
     public function update(Request $request, int $commerceId)
     {
         if (!$commerceId) {
