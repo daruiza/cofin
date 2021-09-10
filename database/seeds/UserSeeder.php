@@ -39,7 +39,7 @@ class UserSeeder extends Seeder
 
 		DB::table('users')->insert(array(
 			'identification' => 1039420535,
-			'name' => 'Andres',
+			'name' => 'Abuelo',
 			'surname' => 'Ruiz',
 			'email' => 'andresruiz@yopmail.com',
 			'phone' => '3194062552',

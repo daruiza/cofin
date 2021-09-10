@@ -74,7 +74,7 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
                 "tax_base" => env('APP_EPAYCO_TAX_BASE'),
                 "currency" => $commerce->currency ? $commerce->currency : env('APP_EPAYCO_CURRENCY', 'COP'),
                 "country" => $commerce->country ? $commerce->country : env('APP_EPAYCO_COUNTRY', 'CO'),
-                "url_response" => env('API_URL') . 'home/' . $request->input('url_response') . '/' . $request->input('invoice'),
+                "url_response" => env('APP_URL') . 'home/' . $request->input('url_response') . '/' . $request->input('invoice'),
                 "url_confirmation" => env('APP_URL') . 'api/epaycopayment/' . env('APP_EPAYCO_URL_CONFIRMATION'),
                 "method_confirmation" => env('APP_EPAYCO_METHOD_CONFIRMATION', 'POST')
             );
@@ -126,8 +126,6 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
             Log::error($e->getMessage());
             return response()->json(['message' => $e->getMessage()], 400);
         }
-
-
 
         Log::info('*-*-* storeTransaction End *-*-*');
         return response()->json($pse, 201);
@@ -219,7 +217,7 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
         }
         try {
             $transaction = $this->customerIdentification($request, $commerceId)->original;
-            if ($transaction->ticketId) {
+            if (isset($transaction->ticketId)) {
                 //al back de epayco
                 $pse = $this->show($request, $commerceId, $transaction->ticketId)->original;
                 // al base de datos
@@ -255,6 +253,11 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
                         );
                     }
                 }
+
+                
+                Log::info('*-*-* Actualización de TRANSACCIÓN*-*-*');
+                Log::info(json_encode($pse));
+
                 return response()->json($epaycoTransaction, 201);
             }
             return response()->json(null, 404);

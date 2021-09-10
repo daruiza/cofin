@@ -30,13 +30,17 @@ class CustomerQuery implements ICustomerQuery
     // transacciónes (pendientes) y las mismas facturas relacionadas
     public function showByCommerce(Request $request)
     {
-        try {
-            $epaycoPaymentQuery = new EpaycoPaymentQuery();
-            $request->request->add(['CustomerIdentification' => $request->input('identification')]);
-            $epaycoPaymentQuery->update($request, $request->input('commerce_id'))->original;
-        } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage()], 400);
-        }
+        // Esto es interesante pero no necesario, el Front debe ser el unico encargado de Actualizar
+        // Las trasacciones en estado de PENDIENTE, de lo contrario se pierde las notificaciones
+
+        // try {
+        //     $epaycoPaymentQuery = new EpaycoPaymentQuery();
+        //     $request->request->add(['CustomerIdentification' => $request->input('identification')]);
+        //     $request->request->add(['Estado' => 'Pendiente']);
+        //     $epaycoPaymentQuery->update($request, $request->input('commerce_id'))->original;
+        // } catch (\Exception $e) {
+        //     return response()->json(['message' => $e->getMessage()], 400);
+        // }
 
         $userObject = new User();
         $userObject->identification = $request->input('identification');

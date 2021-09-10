@@ -15,8 +15,8 @@ class InvoicesSeeder extends Seeder
 	public function run()
 	{
         DB::table('invoices')->insert(array(
-            'name' => 'SERVICIOCOFIN',
-            'number' => 'COFIN1004',
+            'name' => 'AGOSTOCOFIN',
+            'number' => 'AGOCOFIN1004',
             'description' => 'Descripción de Sercvicio',
             'dateStart' => Carbon::now(),
             'dateEnd' => Carbon::now()->addMonth(1),
@@ -28,8 +28,8 @@ class InvoicesSeeder extends Seeder
         ));        
 
         DB::table('invoices')->insert(array(
-            'name' => 'SERVICIOCOFIN',
-            'number' => 'COFIN1005',
+            'name' => 'AGOSTOCOFIN',
+            'number' => 'AGOCOFIN1005',
             'description' => 'Descripción de Sercvicio',
             'dateStart' => Carbon::now(),
             'dateEnd' => Carbon::now()->addMonth(1),
