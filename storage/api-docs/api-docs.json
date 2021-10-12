@@ -556,7 +556,7 @@
                 "tags": [
                     "EPaycoPayment"
                 ],
-                "summary": "Show a Transaction",
+                "summary": "Show a Transaction by InvoiceID",
                 "description": "Return a Transaction",
                 "operationId": "showByInvoiceId",
                 "parameters": [
@@ -600,6 +600,56 @@
                 "summary": "Show a Transaction",
                 "description": "Return a Transaction",
                 "operationId": "showByCustomerIdentification",
+                "parameters": [
+                    {
+                        "name": "commerceId",
+                        "in": "path",
+                        "description": "Commerce Id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "CustomerIdentification",
+                        "in": "query",
+                        "description": "Customer Identification",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "Estado",
+                        "in": "query",
+                        "description": "Estado de la trasaccion en base",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/epaycopayment/getLastTransaction/{commerceId}": {
+            "get": {
+                "tags": [
+                    "EPaycoPayment"
+                ],
+                "summary": "Get the last Transaction",
+                "description": "Return the Last Transaction",
+                "operationId": "getLastTransaction",
                 "parameters": [
                     {
                         "name": "commerceId",

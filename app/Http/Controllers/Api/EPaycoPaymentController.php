@@ -178,7 +178,7 @@ class EPaycoPaymentController extends Controller
      *      path="/epaycopayment/showByInvoiceId/{commerceId}/{invoiceId}",
      *      operationId="showByInvoiceId",
      *      tags={"EPaycoPayment"},
-     *      summary="Show a Transaction",
+     *      summary="Show a Transaction by InvoiceID",
      *      description="Return a Transaction",     
      *      @OA\Parameter(
      *          name="commerceId",
@@ -241,7 +241,7 @@ class EPaycoPaymentController extends Controller
      *          @OA\Schema(
      *              type="integer"
      *          )
-     *      ),     * 
+     *      ),
      *       @OA\Parameter(
      *          name="Estado",
      *          description="Estado de la trasaccion en base",
@@ -268,6 +268,59 @@ class EPaycoPaymentController extends Controller
     public function showByCustomerIdentification(Request $request, int $commerceId)
     {
         return $this->EPaycoPaymentQuery->customerIdentification($request, $commerceId);
+    }
+
+    /**
+     * @OA\Get(
+     *      path="/epaycopayment/getLastTransaction/{commerceId}",
+     *      operationId="getLastTransaction",
+     *      tags={"EPaycoPayment"},
+     *      summary="Get the last Transaction",
+     *      description="Return the Last Transaction",     
+     *      @OA\Parameter(
+     *          name="commerceId",
+     *          description="Commerce Id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     * *      @OA\Parameter(
+     *          name="CustomerIdentification",
+     *          description="Customer Identification",
+     *          required=false,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ), 
+     *       @OA\Parameter(
+     *          name="Estado",
+     *          description="Estado de la trasaccion en base",
+     *          required=false,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *   )
+     */
+    public function getLastTransactionByCommerce(Request $request, int $commerceId)
+    {
+        return $this->EPaycoPaymentQuery->getLastTransactionByCommerce($request, $commerceId);
     }
 
     /**

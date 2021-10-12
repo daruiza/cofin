@@ -13,6 +13,7 @@ interface IEpaycoPaymentQuery
     public function show(Request $request, int  $commerceId, int $transactionId);
     public function showByInvoiceId(Request $request, int  $commerceId, int $invoiceId);
     public function customerIdentification(Request $request, int  $commerceId);    
+    public function getLastTransactionByCommerce(Request $request, int $commerceId);        
     public function update(Request $request, int $id);
     public function destroy(Int $id);
     public function confirmationGet(Request $request);

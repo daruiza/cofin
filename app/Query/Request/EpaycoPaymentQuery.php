@@ -209,6 +209,28 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
         }
     }
 
+    // Retorna la ultima transacción dados el comercio y su cliente
+    public function getLastTransactionByCommerce(Request $request, int  $commerceId)
+    {
+        if (!$commerceId) {
+            return response()->json(['message' => 'Invoice not exist!'], 400);
+        }
+        try {
+            $estado = $request->input('Estado') ? $request->input('Estado') : '';
+            $response =
+                $request->input('CustomerIdentification') ?
+                EpaycoTransaction::CustomerId($request->input('CustomerIdentification'))
+                ->Success(true)
+                ->Estado($estado)
+                ->max('fecha')
+                ->first() :
+                null;
+            return response()->json($response, 201);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 400);
+        }
+    }
+
     // Recibe un cliente y su tienda y actualiza el estado de la primer transacción
     public function update(Request $request, int $commerceId)
     {
@@ -254,7 +276,7 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
                     }
                 }
 
-                
+
                 Log::info('*-*-* Actualización de TRANSACCIÓN*-*-*');
                 Log::info(json_encode($pse));
 
