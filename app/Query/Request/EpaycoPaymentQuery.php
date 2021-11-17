@@ -222,9 +222,11 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
                 EpaycoTransaction::CustomerId($request->input('CustomerIdentification'))
                 ->Success(true)
                 ->Estado($estado)
-                ->max('fecha')
-                ->first() :
+                ->orderBy('fecha', 'desc')
+                ->first()
+                :
                 null;
+
             return response()->json($response, 201);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 400);
