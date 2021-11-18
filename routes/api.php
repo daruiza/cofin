@@ -49,6 +49,7 @@ Route::group(['prefix' => 'invoice'], function () {
         Route::get('show/{id}', 'Api\InvoiceController@show');
         Route::post('store', 'Api\InvoiceController@store');
     });
+    Route::get('getInvoicesLastTransactionByCommerce/{commerceId}', 'Api\InvoiceController@getInvoicesLastTransactionByCommerce');
 });
 
 Route::group(['prefix' => 'payupayment'], function () {
@@ -64,12 +65,11 @@ Route::group(['prefix' => 'epaycopayment'], function () {
     Route::get('index', 'Api\EPaycoPaymentController@index');
     Route::get('banklist/{id}', 'Api\EPaycoPaymentController@bankList');
     Route::post('store/{id}', 'Api\EPaycoPaymentController@store');
-    Route::get('show/{commerceId}/{transactionId}', 'Api\EPaycoPaymentController@show');   
-    Route::get('showByInvoiceId/{commerceId}/{invoiceId}', 'Api\EPaycoPaymentController@showByInvoiceId');   
-    Route::get('showByCustomerIdentification/{commerceId}', 'Api\EPaycoPaymentController@showByCustomerIdentification');   
-    Route::get('getLastTransaction/{commerceId}', 'Api\EPaycoPaymentController@getLastTransactionByCommerce');   
-    Route::get('update/{commerceId}', 'Api\EPaycoPaymentController@update');   
-
+    Route::get('show/{commerceId}/{transactionId}', 'Api\EPaycoPaymentController@show');
+    Route::get('showByInvoiceId/{commerceId}/{invoiceId}', 'Api\EPaycoPaymentController@showByInvoiceId');
+    Route::get('showByCustomerIdentification/{commerceId}', 'Api\EPaycoPaymentController@showByCustomerIdentification');
+    Route::get('getLastTransaction/{commerceId}', 'Api\EPaycoPaymentController@getLastTransactionByCommerce');
+    Route::get('update/{commerceId}', 'Api\EPaycoPaymentController@update');
     Route::post('epayco-pse-bank-confirmation', 'Api\EPaycoPaymentController@confirmationPost');
     Route::get('epayco-pse-bank-confirmation', 'Api\EPaycoPaymentController@confirmationGet');
 });

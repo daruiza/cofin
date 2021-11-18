@@ -804,6 +804,56 @@
                 ]
             }
         },
+        "/invoice/getInvoicesLastTransactionByCommerce/{commerceId}": {
+            "get": {
+                "tags": [
+                    "Invoice"
+                ],
+                "summary": "Get the last Transaction",
+                "description": "Return the Last Transaction",
+                "operationId": "getInvoicesLastTransactionByCommerce",
+                "parameters": [
+                    {
+                        "name": "commerceId",
+                        "in": "path",
+                        "description": "Commerce Id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "CustomerIdentification",
+                        "in": "query",
+                        "description": "Customer Identification",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "Estado",
+                        "in": "query",
+                        "description": "Estado de la trasaccion en base",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
         "/payupayment/index": {
             "get": {
                 "tags": [

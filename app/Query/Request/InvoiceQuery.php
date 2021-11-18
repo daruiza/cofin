@@ -8,6 +8,7 @@ use Exception;
 use App\User;
 use App\Model\Core\Invoice;
 use App\Model\Core\InvoiceDetail;
+use App\Model\Core\EpaycoTransaction;
 use Illuminate\Http\Request;
 use App\Query\Abstraction\IInvoiceQuery;
 
@@ -23,7 +24,7 @@ class InvoiceQuery implements IInvoiceQuery
     {
         return response()->json(['message' => 'Commerce Show!'], 201);
     }
-    
+
     public function store(Request $request)
     {
         if (!$this->validator($request->all())) {
@@ -67,8 +68,8 @@ class InvoiceQuery implements IInvoiceQuery
                 }
             } catch (\Exception $e) {
                 return response()->json(['message' => $e->getMessage()], 400);
-            }            
-        }        
+            }
+        }
         return response()->json(['id' => $newInvoice->id], 200);
     }
 
@@ -79,6 +80,34 @@ class InvoiceQuery implements IInvoiceQuery
     public function destroy(Int $id)
     {
         return response()->json(['message' => 'Commerce Destroy!'], 201);
+    }
+
+    public function invoiceLastTransactionByCommerce(Request $request, int  $commerceId)
+    {
+        if (!$commerceId) {
+            return response()->json(['message' => 'Invoice not exist!'], 400);
+        }
+        try {
+            $estado = $request->input('Estado') ? $request->input('Estado') : '';
+            $response = null;
+            if ($request->input('CustomerIdentification')) {
+                $lastTransaction = EpaycoTransaction::CustomerId($request->input('CustomerIdentification'))
+                    ->Success(true)
+                    ->Estado($estado)
+                    ->orderBy('fecha', 'desc')
+                    ->first();
+
+                $response =  
+                Invoice::TicketId($lastTransaction->ticketId)
+                ->leftJoin('invoices_detail', 'invoices.id', '=', 'invoices_detail.invoice_id')
+                ->get();
+            }
+
+
+            return response()->json($response, 201);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 400);
+        }
     }
 
     protected function validator(array $data)
