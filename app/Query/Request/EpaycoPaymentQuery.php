@@ -223,10 +223,7 @@ class EpaycoPaymentQuery implements IEpaycoPaymentQuery
                 ->Success(true)
                 ->Estado($estado)
                 ->orderBy('fecha', 'desc')
-                ->first()
-                :
-                null;
-
+                ->first() : null;
             return response()->json($response, 201);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 400);
