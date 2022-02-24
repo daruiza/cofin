@@ -22,7 +22,16 @@ class CustomerQuery implements ICustomerQuery
 
     public function show(Request $request)
     {
-        return response()->json(['message' => 'Customer show!'], 201);
+        $userObject = new User();
+        $userObject->identification = $request->input('identification');
+
+        $user =  User::select();
+        $user = $userObject->identification ? $user->where('identification', $userObject->identification) : $user;
+        $user = $user->get()->first();
+
+        return $user ?
+        response()->json($user, 200) :
+        response()->json();
     }
 
     // Consulta las Facturas pendientes por pagar

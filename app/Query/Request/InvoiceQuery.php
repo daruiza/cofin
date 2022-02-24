@@ -89,7 +89,7 @@ class InvoiceQuery implements IInvoiceQuery
         }
         try {
             $estado = $request->input('Estado') ? $request->input('Estado') : '';
-            $response = null;
+            $responseTransaction = null;
             if ($request->input('CustomerIdentification')) {
                 $lastTransaction = EpaycoTransaction::CustomerId($request->input('CustomerIdentification'))
                     ->Success(true)
@@ -97,14 +97,22 @@ class InvoiceQuery implements IInvoiceQuery
                     ->orderBy('fecha', 'desc')
                     ->first();
 
-                $response =  
-                Invoice::TicketId($lastTransaction->ticketId)
-                ->leftJoin('invoices_detail', 'invoices.id', '=', 'invoices_detail.invoice_id')
-                ->get();
+                $responseTransaction =
+                    Invoice::TicketId($lastTransaction->ticketId)
+                    ->leftJoin('invoices_detail', 'invoices.id', '=', 'invoices_detail.invoice_id')
+                    ->get();
             }
 
+            $customer = new CustomerQuery();
+            $request->request->add(['identification' => $request->input('CustomerIdentification')]);
 
-            return response()->json($response, 201);
+            return response()->json(
+                [
+                    'lastTransaction' => $responseTransaction,
+                    'customer' => $customer->show($request)->original,
+                ],
+                201
+            );
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 400);
         }
