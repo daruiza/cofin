@@ -29,8 +29,13 @@ class CustomerQuery implements ICustomerQuery
         $user = $userObject->identification ? $user->where('identification', $userObject->identification) : $user;
         $user = $user->get()->first();
 
+        $commerce = $user->commerce()->first();
+
         return $user ?
-        response()->json($user, 200) :
+        response()->json([
+            'user' => $user,
+            'commerce' => $commerce
+        ], 200) :
         response()->json();
     }
 
