@@ -1,0 +1,1344 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Cofin Documentation",
+        "description": "APP Portfolio Management",
+        "contact": {
+            "email": "daruiza@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8080/api",
+            "description": "Cofin API Server"
+        }
+    ],
+    "paths": {
+        "/commerce/index": {
+            "get": {
+                "tags": [
+                    "Commerce"
+                ],
+                "summary": "Get All Commerces",
+                "description": "Return Commerces",
+                "operationId": "getAllCommerces",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/commerce/store": {
+            "post": {
+                "tags": [
+                    "Commerce"
+                ],
+                "summary": "Store Commerce",
+                "description": "Store Commerce",
+                "operationId": "storeCommerce",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Commerce"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/commerce/show": {
+            "get": {
+                "tags": [
+                    "Commerce"
+                ],
+                "summary": "Get One IdCommerce",
+                "description": "Return Commerces",
+                "operationId": "getIdCommerce",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Commerce id",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Commerce name",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "description",
+                        "in": "query",
+                        "description": "Commerce Description",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "active",
+                        "in": "query",
+                        "description": "Commerce active",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Table Commerce limit",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Table Commerce sort",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Table Commerce page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/commerce/display/{id}": {
+            "get": {
+                "tags": [
+                    "Commerce"
+                ],
+                "summary": "Get One NameCommerce",
+                "description": "Return Commerces",
+                "operationId": "getNameCommerce",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Commerce name",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/customer/index": {
+            "get": {
+                "tags": [
+                    "Customer"
+                ],
+                "summary": "Get All Customers",
+                "description": "Return Customers",
+                "operationId": "getAllCustomers",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/customer/store": {
+            "post": {
+                "tags": [
+                    "Customer"
+                ],
+                "summary": "Store Customer",
+                "description": "Store Customer",
+                "operationId": "storeCustomer",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Customer"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/customer/show": {
+            "get": {
+                "tags": [
+                    "Customer"
+                ],
+                "summary": "Get One IdCustomer",
+                "description": "Return Customers",
+                "operationId": "getIdCustomer",
+                "parameters": [
+                    {
+                        "name": "identification",
+                        "in": "query",
+                        "description": "User identification",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "commerce_id",
+                        "in": "query",
+                        "description": "Commerce Id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/customer/showbycommerce": {
+            "get": {
+                "tags": [
+                    "Customer"
+                ],
+                "summary": "Get One Customer",
+                "description": "Return Customers",
+                "operationId": "getCustomerByCommerce",
+                "parameters": [
+                    {
+                        "name": "identification",
+                        "in": "query",
+                        "description": "User identification",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "commerce_id",
+                        "in": "query",
+                        "description": "Commerce Id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "invoices_status_id",
+                        "in": "query",
+                        "description": "Commerce Id",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/customer/documenttypes": {
+            "get": {
+                "tags": [
+                    "Customer"
+                ],
+                "summary": "Get Document Types",
+                "description": "Return Document Types",
+                "operationId": "getDocumentTypes",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/customer/persontypes": {
+            "get": {
+                "tags": [
+                    "Customer"
+                ],
+                "summary": "Get Person Types",
+                "description": "Return Person Types",
+                "operationId": "getPersonTypes",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/epaycopayment/index": {
+            "get": {
+                "tags": [
+                    "EPaycoPayment"
+                ],
+                "summary": "Get Ping EPayco",
+                "description": "Return ping",
+                "operationId": "getPingEPayco",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Commerce id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/epaycopayment/banklist/{id}": {
+            "get": {
+                "tags": [
+                    "EPaycoPayment"
+                ],
+                "summary": "Get Bank List EPayco",
+                "description": "Return bank list",
+                "operationId": "getBankListEpayco",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Commerce id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/epaycopayment/store/{id}": {
+            "post": {
+                "tags": [
+                    "EPaycoPayment"
+                ],
+                "summary": "Create a Transaction",
+                "description": "Return a Transaction",
+                "operationId": "store",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Commerce id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Transaction"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/epaycopayment/show/{commerceId}/{transactionId}": {
+            "get": {
+                "tags": [
+                    "EPaycoPayment"
+                ],
+                "summary": "Show a Transaction",
+                "description": "Return a Transaction",
+                "operationId": "show",
+                "parameters": [
+                    {
+                        "name": "commerceId",
+                        "in": "path",
+                        "description": "Commerce Id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "transactionId",
+                        "in": "path",
+                        "description": "transaction Id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/epaycopayment/showByInvoiceId/{commerceId}/{invoiceId}": {
+            "get": {
+                "tags": [
+                    "EPaycoPayment"
+                ],
+                "summary": "Show a Transaction by InvoiceID",
+                "description": "Return a Transaction",
+                "operationId": "showByInvoiceId",
+                "parameters": [
+                    {
+                        "name": "commerceId",
+                        "in": "path",
+                        "description": "Commerce Id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "invoiceId",
+                        "in": "path",
+                        "description": "Invoice Id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/epaycopayment/showByCustomerIdentification/{commerceId}": {
+            "get": {
+                "tags": [
+                    "EPaycoPayment"
+                ],
+                "summary": "Show a Transaction",
+                "description": "Return a Transaction",
+                "operationId": "showByCustomerIdentification",
+                "parameters": [
+                    {
+                        "name": "commerceId",
+                        "in": "path",
+                        "description": "Commerce Id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "CustomerIdentification",
+                        "in": "query",
+                        "description": "Customer Identification",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "Estado",
+                        "in": "query",
+                        "description": "Estado de la trasaccion en base",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/epaycopayment/getLastTransaction/{commerceId}": {
+            "get": {
+                "tags": [
+                    "EPaycoPayment"
+                ],
+                "summary": "Get the last Transaction",
+                "description": "Return the Last Transaction",
+                "operationId": "getLastTransaction",
+                "parameters": [
+                    {
+                        "name": "commerceId",
+                        "in": "path",
+                        "description": "Commerce Id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "CustomerIdentification",
+                        "in": "query",
+                        "description": "Customer Identification",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "Estado",
+                        "in": "query",
+                        "description": "Estado de la trasaccion en base",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/epaycopayment/update/{commerceId}": {
+            "get": {
+                "tags": [
+                    "EPaycoPayment"
+                ],
+                "summary": "Update a Transaction",
+                "description": "Return a Transaction After Update",
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "commerceId",
+                        "in": "path",
+                        "description": "Commerce Id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "CustomerIdentification",
+                        "in": "query",
+                        "description": "Customer Identification",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "Estado",
+                        "in": "query",
+                        "description": "Transaction State",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/invoice/index": {
+            "get": {
+                "tags": [
+                    "Invoice"
+                ],
+                "summary": "Get All Invoices",
+                "description": "Return Invoices",
+                "operationId": "getAllInvoices",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/invoice/store": {
+            "post": {
+                "tags": [
+                    "Invoice"
+                ],
+                "summary": "Store Invoice",
+                "description": "Store Invoice",
+                "operationId": "storeInvoice",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Invoice"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/invoice/getInvoicesLastTransactionByCommerce/{commerceId}": {
+            "get": {
+                "tags": [
+                    "Invoice"
+                ],
+                "summary": "Get the last Transaction",
+                "description": "Return the Last Transaction",
+                "operationId": "getInvoicesLastTransactionByCommerce",
+                "parameters": [
+                    {
+                        "name": "commerceId",
+                        "in": "path",
+                        "description": "Commerce Id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "CustomerIdentification",
+                        "in": "query",
+                        "description": "Customer Identification",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "Estado",
+                        "in": "query",
+                        "description": "Estado de la trasaccion en base",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/payupayment/index": {
+            "get": {
+                "tags": [
+                    "PayUPayment"
+                ],
+                "summary": "Get Ping PayU",
+                "description": "Return ping",
+                "operationId": "getPingPayU",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Commerce id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/payupayment/banklist": {
+            "get": {
+                "tags": [
+                    "PayUPayment"
+                ],
+                "summary": "Get Bank List PayU",
+                "description": "Return bank list",
+                "operationId": "getBankListPayU",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Get User Token",
+                "description": "Return Token",
+                "operationId": "getToken",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/auth/logout": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "GetOut",
+                "description": "Close session",
+                "operationId": "c72b623993d113c4537ae7f79d8a00a1",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/auth/user": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Get User Auth",
+                "description": "Return User",
+                "operationId": "getUser",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/auth/signup": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Save User",
+                "description": "Save User in Cofin",
+                "operationId": "saveUser",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserSingup"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Commerce": {
+                "title": "Commerce",
+                "description": "Commerce body data",
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "Id of the commerce",
+                        "type": "string",
+                        "example": "1"
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "Name of the commerce",
+                        "type": "string",
+                        "example": "TempoSolutions"
+                    },
+                    "nit": {
+                        "title": "nit",
+                        "description": "Nit of the Commerce",
+                        "type": "string",
+                        "example": "1039420535-4"
+                    },
+                    "department": {
+                        "title": "department",
+                        "description": "Department of the commerce",
+                        "type": "string",
+                        "example": "Antioquia"
+                    },
+                    "city": {
+                        "title": "city",
+                        "description": "Name of the commerce",
+                        "type": "string",
+                        "example": "Medellin"
+                    },
+                    "adress": {
+                        "title": "adress",
+                        "description": "adress of the commerce",
+                        "type": "string",
+                        "example": "Cll 60 # 75 - 150"
+                    },
+                    "description": {
+                        "title": "description",
+                        "description": "description of the commerce",
+                        "type": "string",
+                        "example": "super"
+                    },
+                    "logo": {
+                        "title": "logo",
+                        "description": "Logo of the commerce",
+                        "type": "string",
+                        "example": "default.png"
+                    },
+                    "currency": {
+                        "title": "currency",
+                        "description": "currency of the commerce",
+                        "type": "string",
+                        "example": "COP"
+                    },
+                    "label": {
+                        "title": "label",
+                        "description": "label of the commerce",
+                        "type": "string",
+                        "example": "{}"
+                    }
+                },
+                "type": "object"
+            },
+            "Customer": {
+                "title": "Customer",
+                "description": "Customer body data",
+                "properties": {
+                    "user_id": {
+                        "title": "user_id",
+                        "description": "user_id of the Customer",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "commerce_id": {
+                        "title": "nit",
+                        "description": "commerce_id of the Customer",
+                        "type": "integer",
+                        "example": "1"
+                    }
+                },
+                "type": "object"
+            },
+            "Invoice": {
+                "title": "Invoice",
+                "description": "Invoice body data",
+                "properties": {
+                    "name": {
+                        "title": "name",
+                        "description": "Name of the commerce",
+                        "type": "string",
+                        "example": "TempoSolutions"
+                    },
+                    "number": {
+                        "title": "number",
+                        "description": "Nit of the Commerce",
+                        "type": "string",
+                        "example": "AB78546"
+                    },
+                    "description": {
+                        "title": "description",
+                        "description": "Description of the invoice",
+                        "type": "string",
+                        "example": "Description"
+                    },
+                    "dateStart": {
+                        "title": "dateStart",
+                        "description": "dateStart of the invoice",
+                        "type": "string",
+                        "example": "2020-01-20"
+                    },
+                    "dateEnd": {
+                        "title": "dateEnd",
+                        "description": "dateEnd of the invoice",
+                        "type": "string",
+                        "example": "2020-12-20"
+                    },
+                    "loop": {
+                        "title": "loop",
+                        "description": "loop of the invoice",
+                        "type": "integer",
+                        "example": "7"
+                    },
+                    "loopDate": {
+                        "title": "loopDate",
+                        "description": "loopDate of the invoice",
+                        "type": "integer",
+                        "example": "2020-12-25"
+                    },
+                    "loopDay": {
+                        "title": "loopDay",
+                        "description": "loopDay of the invoice",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "customer_id": {
+                        "title": "customer_id",
+                        "description": "customer_id of the invoice",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "invoice_detail": {
+                        "title": "invoice_detail",
+                        "description": "invoice_detail of the invoice",
+                        "type": "object",
+                        "example": [
+                            {
+                                "price": 10000,
+                                "volume": 2,
+                                "description": "description"
+                            },
+                            {
+                                "price": 25000,
+                                "volume": 1,
+                                "description": "description"
+                            }
+                        ]
+                    }
+                },
+                "type": "object"
+            },
+            "Transaction": {
+                "title": "Transaction",
+                "description": "Transaction body data",
+                "properties": {
+                    "bank": {
+                        "title": "bank",
+                        "description": "Código del Banco",
+                        "type": "integer",
+                        "example": "banco"
+                    },
+                    "doc_type": {
+                        "title": "doc_type",
+                        "description": "(CC,CE,PPN,SSN,LIC,NIT,DNI)",
+                        "type": "string",
+                        "example": "CC"
+                    },
+                    "doc_number": {
+                        "title": "doc_number",
+                        "description": "Número de identificación",
+                        "type": "string",
+                        "example": "0000AB"
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "Nombres del usuario",
+                        "type": "string",
+                        "example": "Nombres de usuario"
+                    },
+                    "email": {
+                        "title": "email",
+                        "description": "Email del usuario",
+                        "type": "string",
+                        "example": "Correo electrónico del usuario"
+                    },
+                    "cell_phone": {
+                        "title": "cell_phone",
+                        "description": "Número de celular del usuario",
+                        "type": "string",
+                        "example": "+570000"
+                    },
+                    "invoice": {
+                        "title": "invoice",
+                        "description": "Numero de factura",
+                        "type": "string",
+                        "example": "FA0000"
+                    },
+                    "value": {
+                        "title": "value",
+                        "description": "Valor total de la compra, si se calcula el iva y base iva debe ser coincidir con la suma del baseiva + iva",
+                        "type": "string",
+                        "example": "1000000"
+                    },
+                    "type_person": {
+                        "title": "type_person",
+                        "description": "Tipo de Persona",
+                        "type": "string",
+                        "example": "0"
+                    },
+                    "url_response": {
+                        "title": "url_response",
+                        "description": "Url de respuesta final de la transacción, donde el cliente será redireccionado después de finalizar la compra en la pasarela de pagos",
+                        "type": "string",
+                        "example": "/"
+                    }
+                },
+                "type": "object"
+            },
+            "User": {
+                "title": "User",
+                "description": "User body data",
+                "properties": {
+                    "name": {
+                        "title": "name",
+                        "description": "Name of the user",
+                        "type": "string",
+                        "example": "super"
+                    },
+                    "email": {
+                        "title": "email",
+                        "description": "Email of the user",
+                        "type": "string",
+                        "example": "super@yopmail.com"
+                    },
+                    "password": {
+                        "title": "password",
+                        "description": "Password of the user",
+                        "type": "string",
+                        "example": "0000"
+                    }
+                },
+                "type": "object"
+            },
+            "UserSingup": {
+                "title": "UserSingup",
+                "description": "User body data",
+                "properties": {
+                    "name": {
+                        "title": "name",
+                        "description": "Name of the user",
+                        "type": "string",
+                        "example": "super"
+                    },
+                    "email": {
+                        "title": "email",
+                        "description": "Email of the user",
+                        "type": "string",
+                        "example": "super@yopmail.com"
+                    },
+                    "password": {
+                        "title": "password",
+                        "description": "Password of the user",
+                        "type": "string",
+                        "example": "0000"
+                    },
+                    "password_confirmation": {
+                        "title": "password_confirmation",
+                        "description": "Password of the user",
+                        "type": "string",
+                        "example": "0000"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "bearer": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Auth",
+            "description": "API EndPoints of Auth"
+        },
+        {
+            "name": "Commerce",
+            "description": "API EndPoints of Commerces"
+        },
+        {
+            "name": "Customer",
+            "description": "API EndPoints of Customer"
+        },
+        {
+            "name": "Invoice",
+            "description": "API EndPoints of Invoice"
+        },
+        {
+            "name": "EPaycoPayment",
+            "description": "API EndPoints of EPaycoPayment"
+        }
+    ]
+}
