@@ -32,11 +32,11 @@ class CustomerQuery implements ICustomerQuery
         $commerce = $user->commerce()->first();
 
         return $user ?
-        response()->json([
-            'user' => $user,
-            'commerce' => $commerce
-        ], 200) :
-        response()->json();
+            response()->json([
+                'user' => $user,
+                'commerce' => $commerce
+            ], 200) :
+            response()->json();
     }
 
     // Consulta las Facturas pendientes por pagar
@@ -149,7 +149,7 @@ class CustomerQuery implements ICustomerQuery
                     'invoices.loopDay',
                     'invoices.invoices_status_id',
                     $invoicescustomer_id,
-                    'invoices_detail.invoice_id',
+                    'invoices_detail.invoice_id'
                 )
                 ->paginate($limit, ['*'], '', $page)
         ], 200);
